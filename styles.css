@@ -50,6 +50,8 @@ body
 	letter-spacing:4px;
 	margin-left: 2rem;
 	margin-right: 2rem;
+
+	font-weight: 600;
 }
 .title-link:hover
 {

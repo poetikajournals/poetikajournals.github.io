@@ -1,0 +1,75 @@
+body
+{
+	background-color: #b7adad;
+
+	font-family:'Bad Script';
+	color:white;
+}
+
+.page-container
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.page-content
+{
+	height: 100%;
+	width: 100%;
+	max-width: 800px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+
+.title-link-container
+{
+	display:flex;
+	flex-direction: row;
+	flex-flow: row;
+	justify-content: center;
+	width:100%;
+}
+
+.title-link
+{
+	transition: all 0.5s ease-in-out;
+	color: #000000aa;
+	transform: translate(0rem,0rem);
+	border-bottom:#00000000 solid 1px;
+	
+	text-align: center;
+	display:inline-block;
+	font-size: 30px;
+	padding-top:0.02rem;
+	padding-bottom:0.02rem;
+	cursor: pointer;
+	letter-spacing:4px;
+	margin-left: 2rem;
+	margin-right: 2rem;
+}
+.title-link:hover
+{
+	transition: all 0.1s ease-in-out;
+	color: #000000ff;
+	transform: translate(0rem,-0.35rem);
+	border-bottom: #000000ff solid 1px;
+}
+
+.title-link-current
+{
+	transition: all 0.5s ease-in-out;
+	color: #873737AA;
+	transform: translate(0rem,-0.35rem);
+	border-bottom: #873737AA solid 1px;
+}
+.title-link-current:hover
+{
+	transition: all 0.1s ease-in-out;
+	transform: translate(0rem,-0.5rem);
+	color: #873737FF;
+	border-bottom: #873737FF solid 1px;
+}

@@ -13,7 +13,7 @@ var page_content_faq = "<span class='faq_question'>Do you ship internationally?<
 
 
 var page_content_journals = "This is some of my work. Please enjoy."
-var page_content_links = "Here is where you can find me on the web."
+var page_content_links = "Here is where you can find me on the web.<br><br><a class='linklink' href='https://www.instagram.com/poetikajournals/'>Instagram</a><a class='linklink' href='https://www.etsy.com/shop/PoetikaJournals'>Etsy</a><a class='linklink' href='https://www.pinterest.com/poetikajournals/'>Pinterest</a>"
 
 var page_url;
 

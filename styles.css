@@ -50,6 +50,8 @@ body
 	max-width: 800px;
 	margin-left:auto;
 	margin-right:auto;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
 }
 
 
@@ -61,7 +63,6 @@ body
 	flex-flow: row;
 	justify-content: center;
 	width:100%;
-	margin-bottom: 2rem;
 }
 
 .title-link

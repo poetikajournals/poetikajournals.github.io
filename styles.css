@@ -1,9 +1,15 @@
 body
 {
 
-	background-color: #b7adad;
 	font-family: 'Abhaya Libre';
 	color:black;
+	margin:0;
+}
+
+.body-main
+{
+
+	background-color: #b7adad;
 }
 
 .body-background
@@ -32,6 +38,9 @@ body
 
 .page-container
 {
+	display:flex;
+	flex-direction: column;
+
 	position: fixed;
 	top: 2rem;
 	bottom: 2rem;
@@ -42,16 +51,6 @@ body
 
 	border-radius: 10vmin;
 	box-shadow: 0rem 0rem 1.5rem 1.5rem #00000011;
-}
-
-.page-content
-{
-	width: 100%;
-	max-width: 800px;
-	margin-bottom: 2rem;
-	margin-top: 2rem;
-	margin-left:auto;
-	margin-right:auto;
 }
 
 
@@ -67,67 +66,116 @@ body
 
 .title-link
 {
-	transition: all 0.5s ease-in-out;
-	color: #000000aa;
-	transform: translate(0rem,0rem);
-	border-bottom:#00000000 solid 1px;
-	
-	text-align: center;
 	display:inline-block;
-	font-size:1.8rem;
-	padding-top:0.02rem;
-	padding-bottom:0.02rem;
+	-webkit-user-select: none;
+	user-select: none;
 	cursor: pointer;
+
+	text-align: center;
+	font-size:1.8rem;
 	letter-spacing: 0.1rem;
+
 	margin-left: 2rem;
 	margin-right: 2rem;
+
+	transition: all 0.5s ease-in-out;
+	padding-top:0.75rem;
+	padding-bottom:0.25rem;
+	color: #000000aa;
+	border-bottom:#00000000 solid 1px;
 }
 .title-link:hover
 {
-	transition: all 0.1s ease-in-out;
+	transition: all 0.05s ease-in-out;
+	padding-top:0.5rem;
+	padding-bottom:0.5rem;
 	color: #000000ff;
-	transform: translate(0rem,-0.35rem);
 	border-bottom: #000000ff solid 1px;
 }
 
 .title-link-current, .title-link-current:hover
 {
-	transition: all 0.1s ease-in-out;
-	transform: translate(0rem,-0.5rem);
-	color: #873737FF;
-	border-bottom: #873737FF solid 1px;
 	pointer-events: none;
 	cursor: default;
+
+	transition: all 0.05s ease-in-out;
+	padding-top:0.25rem;
+	padding-bottom:0.75rem;
+	color: rgb(199 13 13);
+	border-bottom: rgb(199 13 13) solid 1px;
 }
 
 
+.linklink-group
+{
+	display:flex;
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+	flex-direction: row;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.linklink-subtitle
+{
+	pointer-events: none;
+	display:inline;
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:100%;
+	font-size:1rem;
+	text-align: center;
+	padding-bottom: 0.25rem;
+	margin: 0;
+}
 
 .linklink, .linklink:visited
 {
-	display: block;
+	display: inline-block;
+	flex-grow: 1.0;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-top: 1rem;
+	padding: 1rem;
+	padding-bottom: 2rem;
+
 	color:black;
 	background-color: #FFFFFF10;
 	border-radius:1rem;
 	font-size: 1.5rem;
 	text-align: center;
-	margin-left: 8rem;
-	margin-right: 8rem;
-	margin-top: 1rem;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
 	text-decoration: none;
-	box-shadow: 0rem 0rem 0.25rem 0.25rem #00000005;
+	box-shadow: 0rem 0rem 0rem 0rem #00000005;
 	transform: translate(0px, 0px);
 	transition: all 0.5s ease-in-out;
 }
 .linklink:hover, .linklink:hover:visited
 {
 	transition: all 0.05s ease-in-out;
-	color:white;
-	box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem #00000015;
-	transform: translate(-0.35rem, -0.35rem);
+	background-color: #FFFFFF20;
+	color:rgb(199 13 13);
+	box-shadow: -0.25rem 0.25rem 0.25rem 0.25rem #00000015;
+	transform: translate(0.35rem, -0.35rem);
 }
 
+.page-content
+{
+	flex-grow: 1.0;
+	width: 100%;
+	max-width: 800px;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+
+.page-content-container
+{
+	height: 100%;
+}
 
 .body-long-title
 {
@@ -136,15 +184,42 @@ body
 	font-size:1.2rem;
 }
 
-.body-long
+.content-body
 {
+	display:block;
+	height: 100%;
+	width:100%;
 	letter-spacing:0.05rem;
 	text-align: center;
 	font-size:1.2rem;
 }
 
-.faq_question
+.faq-group
 {
+	width:70%;
+	overflow:hidden;
+	border-radius: 0.5rem;
+	margin-top:1.5rem;
+	margin-bottom:1.5rem;
+	margin-left:auto;
+	margin-right:auto;
+	box-shadow: -0.25rem 0.25rem 0.25rem 0.25rem #00000009;
+}
+
+.faq-question
+{
+	background-color:#ffffff20;
 	font-size: 1.2rem;
-	font-weight:bold;
+	font-weight: bold;
+	text-align: left;
+	padding:0.75rem;
+}
+
+.faq-answer
+{
+	background-color:#ffffff05;
+	font-size: 1rem;
+	font-weight: normal;
+	text-align: right;
+	padding:0.5rem;
 }

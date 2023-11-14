@@ -2,19 +2,19 @@
 
 <html>
 <head>
-	<link href='https://fonts.googleapis.com/css?family=Bad Script' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Petit Formal Script' rel='stylesheet'>
+	<link href="styles.css" rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Marck Script' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
-	<link href="styles.css" rel='stylesheet'>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
-<body onload="when_body_load()">
+<body class="body-main" onload="when_body_load()">
 	<img src="images/tissue.jpg" class="body-background"></img>
 	<div class="page-container">
 		<img style="max-height:16rem; width:100%;object-fit:contain;" src="images/poetika_logo_dark.png">
 
-		<div class = "title-link-container">
+		<div class="title-link-container">
 			<div id="titlelink-journals" class="title-link" onclick="set_page('journals')">Journals</div>
 			<div id="titlelink-about" class="title-link" onclick="set_page('about')">About</div>
 			<div id="titlelink-links" class="title-link" onclick="set_page('links')">Links</div>
@@ -22,16 +22,13 @@
 		</div>
 
 		<div class="page-content">
-
-			<div id="content-container">
-				<div id="page-content-body" class="body-long"></div>
+			<div id="content-container" class="page-content-container">
+				<object type="text/html" data="about.html" id="page-content-body" class="content-body">OBJECT FAILED</object>
 			</div>
 		</div>
 	</div>
 
 	<div class="body-footer">Poetika Journals © 2023</div>
-
-	<!--  SCRIPTS  -->
 
 	<script src="scripts.js"></script>
 </body>

@@ -1,0 +1,50 @@
+[Title]
+Audrey
+[Description]
+This is the Audrey collection.
+[Tags]
+leather
+closure
+mini
+[Images]
+/collections/audrey/audrey_black.jpg
+/collections/audrey/audrey_red.jpg
+/collections/audrey/audrey_white.jpg
+/collections/audrey/audrey_open.jpg
+
+
+
+
+[Title]
+Bloom
+[Description]
+
+<div style="text-align:center; font-weight:bold;">Features</div>
+❤️ Blank pages
+❤️ Japanese linen/cotton blend bookcloth
+❤️ Dimensions: 5 1/2" x 8 3/4"
+❤️ 120 pages of 70 lb text paper - linen finish
+❤️ Magnetic closure
+❤️ Suede leather book mark
+❤️ Front cover is embellished with a foil drawn flower on leather
+❤️ Back cover is embellished with name
+❤️ Metal book corners
+❤️ Waxed Irish linen thread
+❤️ End pocket for loose thoughts
+<div>
+<br>
+<div style="text-align:center; font-weight:bold;">Options</div>
+❤️ Personalized name
+❤️ Birth month flower
+</div>
+[Tags]
+cloth
+loose
+big
+[Images]
+/collections/bloom/bloom_beige.jpg
+/collections/bloom/bloom_lavender.jpg
+/collections/bloom/bloom_rose_pink.jpg
+/collections/bloom/bloom_taupe_rose.jpg
+/collections/bloom/bloom_sage_green.jpg
+/collections/bloom/bloom_personalization.jpg

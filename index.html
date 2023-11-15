@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-	<link href="styles.css" rel='stylesheet'>
+	<link href="/styles.css" rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Marck Script' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="/scripts.js" defer></script>
 </head>
 
 <body class="body-main" onload="when_body_load()">
-	<img src="images/tissue.jpg" class="body-background"></img>
+	<img src="/images/tissue.jpg" class="body-background"></img>
 	<div class="page-container">
-		<img src="images/poetika_logo_dark_trimmed.png" class="logo-main" />
-
-		<div class="title-link-container">
-			<div id="titlelink-journals" class="title-link" onclick="set_page('journals')">Journals</div>
-			<div id="titlelink-about" class="title-link" onclick="set_page('about')">About</div>
-			<div id="titlelink-links" class="title-link" onclick="set_page('links')">Links</div>
-			<div id="titlelink-faq" class="title-link" onclick="set_page('faq')">FAQ</div>
-		</div>
-
 		<div class="page-content">
+			<img src="/images/poetika_logo_dark_trimmed.png" class="logo-main" />
+
+			<div class="title-link-container">
+				<div id="titlelink-journals" class="title-link" onclick="set_page('journals')">Journals</div>
+				<div id="titlelink-about" class="title-link" onclick="set_page('about')">About</div>
+				<div id="titlelink-links" class="title-link" onclick="set_page('links')">Links</div>
+				<div id="titlelink-faq" class="title-link" onclick="set_page('faq')">FAQ</div>
+			</div>
 			<div id="content-container" class="page-content-container">
-				<object type="text/html" data="about.html" id="page-content-body" class="content-body">OBJECT FAILED</object>
+				<div id="page-content-body" class="content-body">NO DATA LOADED</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="body-footer">Poetika Journals © 2023</div>
 
-	<script src="scripts.js"></script>
 </body>
 
 </html>

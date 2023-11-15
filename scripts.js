@@ -29,16 +29,18 @@ function when_body_load()
 	{
 		page_fade_val = 0.0;
 		var target_page = page_url_params.get("page");
+		page_current = target_page;
 		set_page_instant(target_page);
 	}
 	else
 	{
-		set_page_instant("about");
+		page_current = "about";
+		set_page_instant(page_current);
 	}
 
 	collections_loaded = false;
 	queue_collection_load();
-	fetch("collections/list.txt")
+	fetch("/collections/list.txt")
 		.then(x => x.text())
 		.then(x => parse_collections(x));
 
@@ -80,11 +82,18 @@ function update_page_title_link(page_name)
 
 function update_page_content(page_name)
 {
-	e_content_body.data = page_name + '.html';
-	if (page_name === "journals")
-	{
-		e_content_body.onload = () => populate_collection(current_collection_id);
-	}
+	fetch("/" + page_name + ".html")
+		.then(x => x.text())
+		.then(
+			x =>
+			{
+				e_content_body.innerHTML = x;
+				if (page_name === "journals")
+				{
+					populate_collection(current_collection_id);
+				}
+			}
+		);
 }
 
 var page_fade_val = 1.0;
@@ -228,7 +237,21 @@ function populate_collection(collection_id)
 {
 	if (page_current != "journals") return;
 
-	e_content_body.contentDocument.body.innerHTML = "";
+	console.log("attempted to load collection " + collections[collection_id].title);
+	var e_coll_choices = document.getElementById("collection-choices");
+	e_coll_choices.innerHTML = "";
+	for (ci = 0; ci < collections.length; ci++)
+	{
+		var e_choice = document.createElement("div");
+		e_choice.innerHTML = collections[ci].title;
+		e_choice.setAttribute("onclick", "populate_collection(" + ci + ")");
+		e_choice.className = "collection-choice";
+		e_coll_choices.appendChild(e_choice);
+	}
+
+	var e_coll_current = document.getElementById("collection-current");
+
+	e_coll_current.innerHTML = "";
 	var coll = collections[collection_id];
 
 	var e_coll_container = document.createElement("div");
@@ -257,7 +280,5 @@ function populate_collection(collection_id)
 	e_coll_container.appendChild(e_coll_title);
 	e_coll_container.appendChild(e_coll_images);
 	e_coll_container.appendChild(e_coll_description);
-	e_content_body.contentDocument.body.appendChild(e_coll_container);
-
-	e_content_body.onload = null;
+	e_coll_current.appendChild(e_coll_container);
 }

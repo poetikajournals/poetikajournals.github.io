@@ -69,9 +69,9 @@ body
 	font-family: 'Marck Script';
 	display:flex;
 	flex-direction: row;
-	flex-flow: row;
 	justify-content: center;
 	width:100%;
+	padding-bottom:1rem;
 }
 
 .title-link
@@ -172,11 +172,13 @@ body
 
 .page-content
 {
+	display:flex;
+	flex-direction: column;
 	flex-grow: 1.0;
 	width: 100%;
 	max-width: 800px;
 	margin-bottom: 1rem;
-	margin-top: 2rem;
+	margin-top: 1rem;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -205,6 +207,22 @@ body
 }
 
 
+
+
+.collection-choice-list
+{
+	display:flex;
+	flex-direction: row;
+	flex-wrap:wrap;
+	justify-content: center;
+}
+.collection-choice
+{
+	display: inline;
+	font-size: 1.5rem;
+	padding:0.5rem 2rem 0.5rem 2rem;
+	cursor: pointer;
+}
 
 
 .collection-container

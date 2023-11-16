@@ -90,6 +90,7 @@ function update_page_content(page_name)
 				e_content_body.innerHTML = x;
 				if (page_name === "journals")
 				{
+					populate_collection_options();
 					populate_collection(current_collection_id);
 				}
 			}
@@ -229,40 +230,46 @@ function check_collections_loaded()
 	{
 		clearInterval(id_collections_load);
 		console.log("...collections loaded");
+		populate_collection_options();
 		populate_collection(current_collection_id);
 	}
+}
+
+function populate_collection_options()
+{
+	if (page_current != "journals") return;
+
+	var e_coll_choices = document.getElementById("collection-choices");
+	e_coll_choices.innerHTML = "";
+	var e_dropdown = document.createElement("select");
+	for (ci = 0; ci < collections.length; ci++)
+	{
+		var e_dropdown_option = document.createElement("option");
+		e_dropdown_option.innerHTML = collections[ci].title;
+		e_dropdown_option.setAttribute("value", collections[ci].title);
+		e_dropdown.appendChild(e_dropdown_option);
+	}
+	//e_dropdown.selectedIndex = 
+	e_dropdown.setAttribute("onchange", "populate_collection(this.selectedIndex)");
+	e_dropdown.className = "collection-dropdown";
+	e_coll_choices.appendChild(e_dropdown);
 }
 
 function populate_collection(collection_id)
 {
 	if (page_current != "journals") return;
+	if (!collections_loaded) return;
 
 	console.log("attempted to load collection " + collections[collection_id].title);
-	var e_coll_choices = document.getElementById("collection-choices");
-	e_coll_choices.innerHTML = "";
-	for (ci = 0; ci < collections.length; ci++)
-	{
-		var e_choice = document.createElement("div");
-		e_choice.innerHTML = collections[ci].title;
-		e_choice.setAttribute("onclick", "populate_collection(" + ci + ")");
-		e_choice.className = "collection-choice";
-		e_coll_choices.appendChild(e_choice);
-	}
+
 
 	var e_coll_current = document.getElementById("collection-current");
 
 	e_coll_current.innerHTML = "";
 	var coll = collections[collection_id];
 
-	var e_coll_container = document.createElement("div");
-	e_coll_container.className = "collection-container";
-
 	var e_coll_images = document.createElement("div");
 	e_coll_images.className = "collection-image-group";
-
-	var e_coll_title = document.createElement("div");
-	e_coll_title.innerHTML = coll['title'];
-	e_coll_title.className = "collection-title";
 
 	var e_coll_description = document.createElement("div");
 	e_coll_description.innerHTML = coll['description'];
@@ -277,8 +284,6 @@ function populate_collection(collection_id)
 		e_coll_images.appendChild(e_coll_image);
 	}
 
-	e_coll_container.appendChild(e_coll_title);
-	e_coll_container.appendChild(e_coll_images);
-	e_coll_container.appendChild(e_coll_description);
-	e_coll_current.appendChild(e_coll_container);
+	e_coll_current.appendChild(e_coll_images);
+	e_coll_current.appendChild(e_coll_description);
 }

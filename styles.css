@@ -277,7 +277,8 @@ body
 	display: block;
 	border-radius: 1rem;
 	border: #ffffff50 solid 0.25rem;
-	width: calc(100% - 2rem);
+	max-width: calc(100% - 2rem);
+	max-height: calc(100% - 2rem);
 	margin-left: auto;
 	margin-right: auto;
 	object-fit: contain;

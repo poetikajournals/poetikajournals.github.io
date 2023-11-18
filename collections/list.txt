@@ -64,7 +64,7 @@ bookmark
 closure
 corners
 [Images]
-/collections/bloom/bloom_beige.jpg
+/collections/bloom/bloom_limestone.jpg
 /collections/bloom/bloom_lavender.jpg
 /collections/bloom/bloom_rose_pink.jpg
 /collections/bloom/bloom_taupe_rose.jpg

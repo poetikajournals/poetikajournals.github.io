@@ -22,6 +22,7 @@ Audrey
 [Tags]
 cloth
 closure
+corners
 [Images]
 /collections/audrey/audrey_black.jpg
 /collections/audrey/audrey_red.jpg
@@ -61,6 +62,7 @@ Bloom
 cloth
 bookmark
 closure
+corners
 [Images]
 /collections/bloom/bloom_beige.jpg
 /collections/bloom/bloom_lavender.jpg
@@ -103,3 +105,42 @@ closure
 /collections/oliver/oliver_stacked.jpg
 /collections/oliver/oliver_spread.jpg
 /collections/oliver/oliver_open.jpg
+
+
+
+
+
+[Title]
+Faie
+[Description]
+
+Faie, meaning "fairy", is the name of this journal as it exudes a magical and enchanted aura that is reminiscent of mythological fairies and their dwellings.
+<span style="text-align:center;display:block;">❣️🧚🍄</span>
+
+<div style="text-align:center; font-weight:bold;">Features</div>
+❤️ Blank pages
+❤️ Travel size
+❤️ Softback with handmade mulberry paper cover
+❤️ Japanese linen/cotton blend bookcloth
+❤️ Dimensions: 4 1/2" x 6"
+❤️ 96 pages of 70 lb text paper - linen finish
+❤️ Leather wrap closure
+❤️ Metal book corners
+❤️ Waxed Irish linen thread
+❤️ End pocket for loose thoughts
+
+<div style="text-align:center; font-weight:bold;">Spine Colors</div>
+❤️ Green / Mahogany / Tan
+</div>
+
+<a href="https://www.etsy.com/listing/1573218770/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>
+[Tags]
+paper
+mulberry
+travel
+closure
+corners
+[Images]
+/collections/faie/faie_stacked.jpg
+/collections/faie/faie_front.jpg
+/collections/faie/faie_spines.jpg

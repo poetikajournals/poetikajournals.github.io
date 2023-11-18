@@ -224,7 +224,6 @@ body
 .content-body
 {
 	display: block;
-	height: 100%;
 	width: 100%;
 	letter-spacing: 0.05rem;
 	text-align: center;
@@ -278,7 +277,7 @@ body
 	border-radius: 1rem;
 	border: #ffffff50 solid 0.25rem;
 	max-width: calc(100% - 2rem);
-	max-height: calc(100% - 2rem);
+	max-height: calc(100% - 10rem);
 	margin-left: auto;
 	margin-right: auto;
 	object-fit: contain;
@@ -310,7 +309,6 @@ body
 	outline: none !important;
 	font-size: 1.5rem;
 	overflow: visible;
-	flex-grow: 1.0;
 	text-align: center;
 }
 

@@ -314,14 +314,12 @@ function populate_collection(collection_id)
 
 function hide_preview()
 {
-	console.log("hide preview");
 	e_preview_container.className = "preview-container hidden";
 }
 
 function show_preview(src)
 {
 	var coll = collections[current_collection_id];
-	console.log("show preview");
 	e_preview_container.className = "preview-container";
 	e_preview_img.src = src.src;
 	e_preview_title.innerHTML = coll.title;

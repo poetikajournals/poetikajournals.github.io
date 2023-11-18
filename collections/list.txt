@@ -1,8 +1,7 @@
 [Title]
 Audrey
 [Description]
-🌙 Named after the one and only Audrey Hepburn as this collection feels to me reminiscent of her elegance
-and simplicity in exuding an unforgettably sophisticated and charming aura.
+🌙 Named after the one and only Audrey Hepburn as this collection feels to me reminiscent of her elegance and simplicity in exuding an unforgettably sophisticated and charming aura.
 
 <div style="text-align:center; font-weight:bold;">Features</div>
 ❤️ Blank pages
@@ -21,9 +20,8 @@ and simplicity in exuding an unforgettably sophisticated and charming aura.
 
 <a href="https://www.etsy.com/listing/1561166740/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>
 [Tags]
-leather
+cloth
 closure
-mini
 [Images]
 /collections/audrey/audrey_black.jpg
 /collections/audrey/audrey_red.jpg
@@ -61,8 +59,8 @@ Bloom
 <a href="https://www.etsy.com/listing/1572783391/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>
 [Tags]
 cloth
-loose
-big
+bookmark
+closure
 [Images]
 /collections/bloom/bloom_beige.jpg
 /collections/bloom/bloom_lavender.jpg
@@ -70,3 +68,38 @@ big
 /collections/bloom/bloom_taupe_rose.jpg
 /collections/bloom/bloom_sage_green.jpg
 /collections/bloom/bloom_personalization.jpg
+
+
+
+
+[Title]
+Oliver
+[Description]
+
+🌙 One day you finally knew what you had to do, and began..."
+<span style="text-align:center;display:block;">-"The Journey" by Mary Oliver</span>
+
+<div style="text-align:center; font-weight:bold;">Features</div>
+❤️ Blank pages
+❤️ Travel size
+❤️ Softback
+❤️ Japanese linen/cotton blend bookcloth
+❤️ Dimensions: 4 1/2" x 5 1/2"
+❤️ 120 pages of 70 lb text paper - linen finish
+❤️ Leather wrap closure
+❤️ Waxed Irish linen thread
+❤️ End pocket for loose thoughts
+
+<div style="text-align:center; font-weight:bold;">Colors</div>
+❤️ Metallic Rose / Limestone / Sage Green / Cocoa
+</div>
+
+<a href="https://www.etsy.com/listing/1581613346/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>
+[Tags]
+cloth
+travel
+closure
+[Images]
+/collections/oliver/oliver_stacked.jpg
+/collections/oliver/oliver_spread.jpg
+/collections/oliver/oliver_open.jpg

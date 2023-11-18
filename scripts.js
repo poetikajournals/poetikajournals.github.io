@@ -6,6 +6,11 @@ var e_link_journals;
 var e_link_faq;
 var e_link_links;
 
+var e_preview_container;
+var e_preview_title;
+var e_preview_subtitle;
+var e_preview_img;
+
 var page_url;
 
 var collections_dir;
@@ -22,6 +27,11 @@ function when_body_load()
 	e_link_journals = document.getElementById("titlelink-journals");
 	e_link_faq = document.getElementById("titlelink-faq");
 	e_link_links = document.getElementById("titlelink-links");
+
+	e_preview_container = document.getElementById("preview-container");
+	e_preview_img = document.getElementById("preview-image");
+	e_preview_title = document.getElementById("preview-title");
+	e_preview_subtitle = document.getElementById("preview-subtitle");
 
 	page_url = new URL(window.location.toLocaleString());
 	var page_url_params = page_url.searchParams;
@@ -124,8 +134,14 @@ function page_fade_start(next_page)
 
 			update_page_content(next_page);
 
-			//start fade in
-			id_fade_in = setInterval(frame_fade_in, 15);
+			setTimeout(
+				function ()
+				{
+					//start fade in
+					id_fade_in = setInterval(frame_fade_in, 15);
+				},
+				400
+			);
 		}
 	}
 
@@ -260,6 +276,8 @@ function populate_collection(collection_id)
 	if (page_current != "journals") return;
 	if (!collections_loaded) return;
 
+	current_collection_id = collection_id;
+
 	console.log("attempted to load collection " + collections[collection_id].title);
 
 
@@ -281,9 +299,31 @@ function populate_collection(collection_id)
 		var e_coll_image = document.createElement("img");
 		e_coll_image.className = "collection-image";
 		e_coll_image.src = image_path;
+		e_coll_image.title = image_path;
+		e_coll_image.setAttribute("onclick", "show_preview(this)");
 		e_coll_images.appendChild(e_coll_image);
 	}
 
 	e_coll_current.appendChild(e_coll_images);
 	e_coll_current.appendChild(e_coll_description);
+}
+
+
+
+
+
+function hide_preview()
+{
+	console.log("hide preview");
+	e_preview_container.className = "preview-container hidden";
+}
+
+function show_preview(src)
+{
+	var coll = collections[current_collection_id];
+	console.log("show preview");
+	e_preview_container.className = "preview-container";
+	e_preview_img.src = src.src;
+	e_preview_title.innerHTML = coll.title;
+	e_preview_subtitle.innerHTML = src.title;
 }

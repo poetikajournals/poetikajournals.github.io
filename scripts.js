@@ -269,6 +269,8 @@ function populate_collection_options()
 	e_dropdown.setAttribute("onchange", "populate_collection(this.selectedIndex)");
 	e_dropdown.className = "collection-dropdown";
 	e_coll_choices.appendChild(e_dropdown);
+
+	e_dropdown.selectedIndex = current_collection_id;
 }
 
 function populate_collection(collection_id)
@@ -277,9 +279,6 @@ function populate_collection(collection_id)
 	if (!collections_loaded) return;
 
 	current_collection_id = collection_id;
-
-	console.log("attempted to load collection " + collections[collection_id].title);
-
 
 	var e_coll_current = document.getElementById("collection-current");
 

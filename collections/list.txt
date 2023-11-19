@@ -78,8 +78,8 @@ corners
 Oliver
 [Description]
 
-🌙 One day you finally knew what you had to do, and began..."
-<span style="text-align:center;display:block;">-"The Journey" by Mary Oliver</span>
+"One day you finally knew what you had to do, and began..."
+<span style="text-align:center;display:block;font-size:1rem;font-style:italic;">- "The Journey" by Mary Oliver</span>
 
 <div style="text-align:center; font-weight:bold;">Features</div>
 ❤️ Blank pages

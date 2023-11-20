@@ -11,8 +11,6 @@ var e_preview_title;
 var e_preview_subtitle;
 var e_preview_img;
 
-var page_url;
-
 var collections_dir;
 var collections = [];
 var collections_loaded = false;
@@ -23,6 +21,7 @@ var current_collection_id = 0;
 function when_body_load()
 {
 	e_content_body = document.getElementById("page-content-body");
+
 	e_link_about = document.getElementById("titlelink-about");
 	e_link_journals = document.getElementById("titlelink-journals");
 	e_link_faq = document.getElementById("titlelink-faq");
@@ -33,23 +32,23 @@ function when_body_load()
 	e_preview_title = document.getElementById("preview-title");
 	e_preview_subtitle = document.getElementById("preview-subtitle");
 
-	page_url = new URL(window.location.toLocaleString());
-	var page_url_params = page_url.searchParams;
-	if (page_url_params.has("page"))
+	page_fade_val = 1.0;
+	if (localStorage)
 	{
-		page_fade_val = 0.0;
-		var target_page = page_url_params.get("page");
-		page_current = target_page;
-		set_page_instant(target_page);
-	}
-	else
-	{
-		page_current = "about";
-		set_page_instant(page_current);
+		var last_page = localStorage.getItem("page");
+		if (last_page == null)
+		{
+			page_current = "about";
+			set_page(page_current);
+		}
+		else
+		{
+			page_current = last_page;
+			set_page(last_page);
+		}
 	}
 
 	collections_loaded = false;
-	queue_collection_load();
 	fetch("/collections/list.txt")
 		.then(x => x.text())
 		.then(x => parse_collections(x));
@@ -60,17 +59,17 @@ function when_body_load()
 function set_page_instant(page_name)
 {
 	page_current = page_name;
-	window.history.pushState('', '', "?page=" + page_name);
 	update_page_title_link(page_name);
 	update_page_content(page_name);
+	localStorage.setItem("page", page_name);
 }
 
 function set_page(page_name)
 {
 	page_current = page_name;
-	window.history.pushState('', '', "?page=" + page_name);
 	update_page_title_link(page_name);
 	page_fade_start(page_name);
+	localStorage.setItem("page", page_name);
 }
 
 function reset_page_title_links()
@@ -202,6 +201,8 @@ function parse_collections(list_text)
 				else
 				{
 					if (this_line.slice(0, 4) === "<div") current_collection['description'] += this_line;
+					else if (this_line.slice(0, 3) === "<li") current_collection['description'] += this_line;
+					else if (this_line.slice(0, 3) === "<ul") current_collection['description'] += this_line;
 					else current_collection['description'] += this_line + "<br>";
 				}
 			}
@@ -241,7 +242,6 @@ function queue_collection_load()
 
 function check_collections_loaded()
 {
-	console.log("checking collections...");
 	if (collections_loaded === true)
 	{
 		clearInterval(id_collections_load);
@@ -256,7 +256,6 @@ function populate_collection_options()
 	if (page_current != "journals") return;
 
 	var e_coll_choices = document.getElementById("collection-choices");
-	e_coll_choices.innerHTML = "";
 	var e_dropdown = document.createElement("select");
 	for (ci = 0; ci < collections.length; ci++)
 	{

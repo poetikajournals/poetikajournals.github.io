@@ -1,21 +1,27 @@
 [Title]
 Audrey
 [Description]
-🌙 Named after the one and only Audrey Hepburn as this collection feels to me reminiscent of her elegance and simplicity in exuding an unforgettably sophisticated and charming aura.
 
+<div style="text-align:center;">
+Named after the one and only Audrey Hepburn as this collection feels to me reminiscent of her elegance and simplicity in exuding an unforgettably sophisticated and charming aura.
+</div>
 <div style="text-align:center; font-weight:bold;">Features</div>
-❤️ Blank pages
-❤️ Japanese linen/cotton blend bookcloth
-❤️ Dimensions: 5 1/2" x 8 3/4"
-❤️ 120 pages of 70 lb writing paper - linen finish
-❤️ Leather wrap closure
-❤️ Suede leather bookmark
-❤️ Metal book corners
-❤️ Waxed Irish linen thread
-❤️ End pocket for loose thoughts
+<ul class="feature-list">
+<li class="feature-list">Blank pages</li>
+<li class="feature-list">Japanese linen/cotton blend bookcloth</li>
+<li class="feature-list">Dimensions: 5 1/2" x 8 3/4"</li>
+<li class="feature-list">120 pages of 70 lb writing paper - linen finish</li>
+<li class="feature-list">Leather wrap closure</li>
+<li class="feature-list">Suede leather bookmark</li>
+<li class="feature-list">Metal book corners</li>
+<li class="feature-list">Waxed Irish linen thread</li>
+<li class="feature-list">End pocket for loose thoughts</li>
+</ul>
 
 <div style="text-align:center; font-weight:bold;">Colors</div>
-❤️ Black / White / Red
+<ul class="feature-list">
+<li class="feature-list">Black / White / Red</li>
+</ul>
 </div>
 
 <a href="https://www.etsy.com/listing/1561166740/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>
@@ -37,24 +43,30 @@ Bloom
 [Description]
 
 <div style="text-align:center; font-weight:bold;">Features</div>
-❤️ Blank pages
-❤️ Japanese linen/cotton blend bookcloth
-❤️ Dimensions: 5 1/2" x 8 3/4"
-❤️ 120 pages of 70 lb text paper - linen finish
-❤️ Magnetic closure
-❤️ Suede leather bookmark
-❤️ Front cover is embellished with a foil drawn flower on leather
-❤️ Back cover is embellished with stamped text
-❤️ Metal book corners
-❤️ Waxed Irish linen thread
-❤️ End pocket for loose thoughts
+<ul class="feature-list">
+<li class="feature-list">Blank pages</li>
+<li class="feature-list">Japanese linen/cotton blend bookcloth</li>
+<li class="feature-list">Dimensions: 5 1/2" x 8 3/4"</li>
+<li class="feature-list">120 pages of 70 lb text paper - linen finish</li>
+<li class="feature-list">Magnetic closure</li>
+<li class="feature-list">Suede leather bookmark</li>
+<li class="feature-list">Front cover is embellished with a foil drawn flower on leather</li>
+<li class="feature-list">Back cover is embellished with stamped text</li>
+<li class="feature-list">Metal book corners</li>
+<li class="feature-list">Waxed Irish linen thread</li>
+<li class="feature-list">End pocket for loose thoughts</li>
+</ul>
 
 <div style="text-align:center; font-weight:bold;">Colors</div>
-❤️ Sage Green / Lavender / Rose Pink / Taupe Rose / Limestone
+<ul class="feature-list">
+<li class="feature-list">Sage Green / Lavender / Rose Pink / Taupe Rose / Limestone</li>
+</ul>
 </div>
 <div style="text-align:center; font-weight:bold;">Options</div>
-❤️ Personalized name
-❤️ Birth month flower
+<ul class="feature-list">
+<li class="feature-list">Personalized name</li>
+<li class="feature-list">Birth month flower</li>
+</ul>
 </div>
 
 <a href="https://www.etsy.com/listing/1572783391/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>
@@ -65,11 +77,11 @@ closure
 corners
 [Images]
 /collections/bloom/bloom_limestone.jpg
+/collections/bloom/bloom_personalization.jpg
 /collections/bloom/bloom_lavender.jpg
 /collections/bloom/bloom_rose_pink.jpg
 /collections/bloom/bloom_taupe_rose.jpg
 /collections/bloom/bloom_sage_green.jpg
-/collections/bloom/bloom_personalization.jpg
 
 
 
@@ -78,22 +90,26 @@ corners
 Oliver
 [Description]
 
-"One day you finally knew what you had to do, and began..."
-<span style="text-align:center;display:block;font-size:1rem;font-style:italic;">- "The Journey" by Mary Oliver</span>
+<div style="text-align:center;margin-left:auto;margin-right:auto;">"One day you finally knew what you had to do, and began..."</div>
+<div style="text-align:center;font-size:1rem;font-style:italic;">- "The Journey" by Mary Oliver</div>
 
 <div style="text-align:center; font-weight:bold;">Features</div>
-❤️ Blank pages
-❤️ Travel size
-❤️ Softback
-❤️ Japanese linen/cotton blend bookcloth
-❤️ Dimensions: 4 1/2" x 5 1/2"
-❤️ 120 pages of 70 lb text paper - linen finish
-❤️ Leather wrap closure
-❤️ Waxed Irish linen thread
-❤️ End pocket for loose thoughts
+<ul class="feature-list">
+<li class="feature-list">Blank pages</li>
+<li class="feature-list">Travel size</li>
+<li class="feature-list">Softback</li>
+<li class="feature-list">Japanese linen/cotton blend bookcloth</li>
+<li class="feature-list">Dimensions: 4 1/2" x 5 1/2"</li>
+<li class="feature-list">120 pages of 70 lb text paper - linen finish</li>
+<li class="feature-list">Leather wrap closure</li>
+<li class="feature-list">Waxed Irish linen thread</li>
+<li class="feature-list">End pocket for loose thoughts</li>
+</ul>
 
 <div style="text-align:center; font-weight:bold;">Colors</div>
-❤️ Metallic Rose / Limestone / Sage Green / Cocoa
+<ul class="feature-list">
+<li class="feature-list">Metallic Rose / Limestone / Sage Green / Cocoa</li>
+</ul>
 </div>
 
 <a href="https://www.etsy.com/listing/1581613346/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>
@@ -114,23 +130,27 @@ closure
 Faie
 [Description]
 
+<div style="text-align:center;">
 Faie, meaning "fairy", is the name of this journal as it exudes a magical and enchanted aura that is reminiscent of mythological fairies and their dwellings.
-<span style="text-align:center;display:block;">❣️🧚🍄</span>
-
+</div>
 <div style="text-align:center; font-weight:bold;">Features</div>
-❤️ Blank pages
-❤️ Travel size
-❤️ Softback with handmade mulberry paper cover
-❤️ Japanese linen/cotton blend bookcloth
-❤️ Dimensions: 4 1/2" x 6"
-❤️ 96 pages of 70 lb text paper - linen finish
-❤️ Leather wrap closure
-❤️ Metal book corners
-❤️ Waxed Irish linen thread
-❤️ End pocket for loose thoughts
+<ul class="feature-list">
+<li class="feature-list">Blank pages</li>
+<li class="feature-list">Travel size</li>
+<li class="feature-list">Softback with handmade mulberry paper cover</li>
+<li class="feature-list">Japanese linen/cotton blend bookcloth</li>
+<li class="feature-list">Dimensions: 4 1/2" x 6"</li>
+<li class="feature-list">96 pages of 70 lb text paper - linen finish</li>
+<li class="feature-list">Leather wrap closure</li>
+<li class="feature-list">Metal book corners</li>
+<li class="feature-list">Waxed Irish linen thread</li>
+<li class="feature-list">End pocket for loose thoughts</li>
+</ul>
 
 <div style="text-align:center; font-weight:bold;">Spine Colors</div>
-❤️ Green / Mahogany / Tan
+<ul class="feature-list">
+<li class="feature-list">Green / Mahogany</li>
+</ul>
 </div>
 
 <a href="https://www.etsy.com/listing/1573218770/" class="link-etsy" title="Etsy" target="_blank" rel="noreferrer noopener"> View on Etsy </a>

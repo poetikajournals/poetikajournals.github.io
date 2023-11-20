@@ -3,10 +3,11 @@
 <html>
 
 <head>
-	<link href="/styles.css" rel='stylesheet'>
+	<title>Poetika Journals</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Marck Script' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Abhaya Libre' rel='stylesheet'>
+	<link href="/styles.css" rel='stylesheet'>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -16,7 +17,6 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="theme-color" content="#ffffff">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="/scripts.js" defer></script>
 </head>
 
@@ -34,11 +34,11 @@
 				<div id="titlelink-faq" class="title-link" onclick="set_page('faq')">FAQ</div>
 			</div>
 
-
 			<div id="content-container" class="page-content-container">
-				<div id="page-content-body" class="content-body">NO DATA LOADED</div>
+				<div id="page-content-body" class="content-body"></div>
 			</div>
 		</div>
+
 	</div>
 
 	<div id="preview-container" class="preview-container hidden" onclick="hide_preview()">
@@ -46,6 +46,8 @@
 			<div id="preview-title" class="preview-title">Preview Title</div>
 			<img id="preview-image" class="preview-image" src="/collections/audrey/audrey_black.jpg" />
 			<div id="preview-subtitle" class="preview-title" style="font-size: 1.2rem;">Preview subtitle</div>
+			<div id="preview-prev" class="preview-nav-button" style="left:7%;transform:rotate(180deg);" onclick="event.stopPropagation()">➻</div>
+			<div id="preview-next" class="preview-nav-button" style="right:7%" onclick="event.stopPropagation()">➻</div>
 		</div>
 	</div>
 

@@ -542,18 +542,31 @@ body
 	object-fit: contain;
 }
 
-
 .welcome-image
 {
-	height: 25vw;
-	max-height: 300px;
+	display: block;
+	float: none;
+	margin: auto;
+	width: 70%;
+
 	aspect-ratio: 1.0;
 	object-fit: contain;
-	margin: 1rem;
 	border-radius: 50%;
 	border: black solid 2px;
-	shape-outside: circle(50%);
-	float: left;
+	shape-outside: none;
+}
+
+
+@media screen and (min-width: 600px)
+{
+	.welcome-image
+	{
+		display: inline;
+		float: left;
+		margin: 1rem;
+		width: 40%;
+		shape-outside: circle(50%);
+	}
 }
 
 .welcome-text

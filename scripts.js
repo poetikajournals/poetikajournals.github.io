@@ -1,6 +1,9 @@
 var page_current;
 
 var e_content_body;
+var e_intro_container;
+
+//var e_link_welcome;
 var e_link_about;
 var e_link_journals;
 var e_link_faq;
@@ -21,7 +24,9 @@ var current_collection_id = 0;
 function when_body_load()
 {
 	e_content_body = document.getElementById("page-content-body");
+	e_intro_container = document.getElementById("intro");
 
+	//e_link_welcome = document.getElementById("titlelink-welcome");
 	e_link_about = document.getElementById("titlelink-about");
 	e_link_journals = document.getElementById("titlelink-journals");
 	e_link_faq = document.getElementById("titlelink-faq");
@@ -38,7 +43,7 @@ function when_body_load()
 		var last_page = localStorage.getItem("page");
 		if (last_page == null)
 		{
-			page_current = "about";
+			page_current = "welcome";
 			set_page(page_current);
 		}
 		else
@@ -74,6 +79,7 @@ function set_page(page_name)
 
 function reset_page_title_links()
 {
+	//e_link_welcome.className = "title-link";
 	e_link_about.className = "title-link";
 	e_link_journals.className = "title-link";
 	e_link_faq.className = "title-link";
@@ -83,6 +89,7 @@ function reset_page_title_links()
 function update_page_title_link(page_name)
 {
 	reset_page_title_links();
+	//if (page_name == "welcome") e_link_welcome.className = "title-link title-link-current";
 	if (page_name == "about") e_link_about.className = "title-link title-link-current";
 	else if (page_name == "journals") e_link_journals.className = "title-link title-link-current";
 	else if (page_name == "links") e_link_links.className = "title-link title-link-current";
@@ -232,7 +239,6 @@ function parse_collections(list_text)
 	current_collection = [];
 	collections_loaded = true;
 }
-
 
 function queue_collection_load()
 {

@@ -289,10 +289,12 @@ body
 .preview-title
 {
 	text-align: center;
-	color: black;
+	color: white;
+	text-shadow: #00000085 -0.15rem 0.15rem 0.15rem;
 	font-size: 2rem;
 	padding: 1rem;
 	word-wrap: break-word;
+	font-weight: bold;
 }
 
 .preview-image
@@ -353,13 +355,13 @@ body
 	border-radius: 0.5rem;
 	object-fit: cover;
 
-	transition: all 0.2s ease-in-out;
-	filter: opacity(50%);
+	transition: all 0.1s ease-in-out;
+	opacity: 50%;
 }
 .collection-choice-image:hover
 {
 	transition: all 0.05s ease-in-out;
-	filter: opacity(100%);
+	opacity: 100%;
 }
 
 .collection-choice-name
@@ -372,7 +374,7 @@ body
 	z-index: 10;
 	color: white;
 	text-align: center;
-	text-shadow: #000000F0 0.1rem 0.1rem 0.2rem;
+	text-shadow: #000000F0 -0.1rem 0.1rem 0.3rem;
 	font-family: 'Marck Script';
 	font-weight: normal;
 }
@@ -386,19 +388,19 @@ body
 	padding: 0.75rem;
 	margin: 0.25rem;
 	min-width: 10rem;
-	width: 18rem;
-	height: 18rem;
+	width: 15rem;
+	height: 15rem;
 	background-color: #ffffff23;
 	cursor: pointer;
 
 	transition: all 0.1s ease-in-out;
-	box-shadow: 0rem 0rem 0rem 0rem #00000035;
+	box-shadow: 0rem 0rem 0rem 0rem #00000095;
 	transform: none;
 }
 .collection-choice:hover
 {
 	transition: all 0.05s ease-in-out;
-	box-shadow: -0.25rem 0.25rem 0.25rem 0.25rem #00000010;
+	box-shadow: -0.25rem 0.25rem 0.5rem 0.125rem #00000020;
 	transform: translate(0.25rem, -0.25rem);
 }
 
@@ -480,6 +482,13 @@ body
 	font-size: 2.5rem;
 }
 
+.collection-subtitle
+{
+	font-size: 1.2rem;
+	padding: 0.5rem;
+	background-color: #ffffff30;
+}
+
 .collection-desc
 {
 	display: inline-block;
@@ -502,6 +511,8 @@ body
 	flex-shrink: 1.0;
 	max-height: 12rem;
 	margin: 1rem;
+	aspect-ratio: 1.0;
+	object-fit: cover;
 	cursor: zoom-in;
 
 	border-radius: 0.7rem;

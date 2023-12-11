@@ -58,6 +58,15 @@
             "showcaseImageIndex": 0,
             "groups": [
                 {
+                    "name": "Group",
+                    "images": [
+                        {
+                            "desc": "Together",
+                            "path": "/collections/audrey/audrey-group.jpg"
+                        }
+                    ]
+                },
+                {
                     "name": "Black",
                     "images": [
                         {

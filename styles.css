@@ -1,7 +1,7 @@
 :root
 {
 	--col-highlight: rgb(199 13 13);
-	--col-background: #b7adad;
+	--col-background: #f1d9d9;
 }
 
 ::selection
@@ -55,7 +55,7 @@ body
 	padding-top: 0.75rem;
 	padding-bottom: 0.25rem;
 	text-align: center;
-	color: white;
+	color: rgb(25, 25, 25);
 	letter-spacing: 0.1rem;
 }
 
@@ -289,7 +289,7 @@ body
 .preview-title
 {
 	text-align: center;
-	color: white;
+	color: black;
 	font-size: 2rem;
 	padding: 1rem;
 	word-wrap: break-word;
@@ -339,7 +339,111 @@ body
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+	align-items: center;
 }
+
+.collection-choice-image
+{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 0.5rem;
+	object-fit: cover;
+
+	transition: all 0.2s ease-in-out;
+	filter: opacity(50%);
+}
+.collection-choice-image:hover
+{
+	transition: all 0.05s ease-in-out;
+	filter: opacity(100%);
+}
+
+.collection-choice-name
+{
+	pointer-events: none;
+	display: block;
+	position: absolute;
+	margin-top: 40%;
+	width: 100%;
+	z-index: 10;
+	color: white;
+	text-align: center;
+	text-shadow: #000000F0 0.1rem 0.1rem 0.2rem;
+	font-family: 'Marck Script';
+	font-weight: normal;
+}
+
+.collection-choice
+{
+	position: relative;
+
+	border-radius: 0.5rem;
+	font-size: 2rem;
+	padding: 0.75rem;
+	margin: 0.25rem;
+	min-width: 10rem;
+	width: 18rem;
+	height: 18rem;
+	background-color: #ffffff23;
+	cursor: pointer;
+
+	transition: all 0.1s ease-in-out;
+	box-shadow: 0rem 0rem 0rem 0rem #00000035;
+	transform: none;
+}
+.collection-choice:hover
+{
+	transition: all 0.05s ease-in-out;
+	box-shadow: -0.25rem 0.25rem 0.25rem 0.25rem #00000010;
+	transform: translate(0.25rem, -0.25rem);
+}
+
+
+
+.collection-header
+{
+	display: flex;
+	padding-top: 1rem;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.collection-title
+{
+	color: black;
+	/*var(--col-highlight);*/
+	flex-grow: 1.0;
+	transform: translate(0, 0.5rem);
+}
+
+.collection-header-spacer
+{
+	flex-grow: 1.0;
+}
+
+.collection-back-button
+{
+	object-fit: contain;
+	object-position: left;
+	padding-right: auto;
+	height: 2rem;
+	padding: 0.25rem;
+	cursor: pointer;
+
+	transition: all 0.05s ease-in-out;
+	transform: translate(0rem, 0rem);
+	filter: drop-shadow(0.2rem 0.2rem 0.1rem #00000020) invert(100%);
+}
+.collection-back-button:hover
+{
+	transform: translate(-0.2rem, 0rem);
+	transition: all 0.05s ease-in-out;
+}
+
 
 .collection-dropdown,
 .collection-dropdown:focus,
@@ -470,6 +574,7 @@ body
 	margin-bottom: 1.5rem;
 	margin-left: auto;
 	margin-right: auto;
+	backdrop-filter: blur(0.25rem);
 
 	transition: all 0.25s ease-in-out;
 	transform: translate(0rem, 0rem);

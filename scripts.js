@@ -3,7 +3,6 @@ var page_current;
 var e_content_body;
 var e_intro_container;
 
-//var e_link_welcome;
 var e_link_about;
 var e_link_journals;
 var e_link_faq;
@@ -15,7 +14,7 @@ var e_preview_subtitle;
 var e_preview_img;
 
 var collections_dir;
-var collections = [];
+var collectionsList;
 var collections_loaded = false;
 var id_collections_load;
 var current_collection_id = 0;
@@ -26,7 +25,6 @@ function when_body_load()
 	e_content_body = document.getElementById("page-content-body");
 	e_intro_container = document.getElementById("intro");
 
-	//e_link_welcome = document.getElementById("titlelink-welcome");
 	e_link_about = document.getElementById("titlelink-about");
 	e_link_journals = document.getElementById("titlelink-journals");
 	e_link_faq = document.getElementById("titlelink-faq");
@@ -54,7 +52,7 @@ function when_body_load()
 	}
 
 	collections_loaded = false;
-	fetch("/collections/list.txt")
+	fetch("/collections/list.json")
 		.then(x => x.text())
 		.then(x => parse_collections(x));
 
@@ -79,7 +77,6 @@ function set_page(page_name)
 
 function reset_page_title_links()
 {
-	//e_link_welcome.className = "title-link";
 	e_link_about.className = "title-link";
 	e_link_journals.className = "title-link";
 	e_link_faq.className = "title-link";
@@ -89,7 +86,6 @@ function reset_page_title_links()
 function update_page_title_link(page_name)
 {
 	reset_page_title_links();
-	//if (page_name == "welcome") e_link_welcome.className = "title-link title-link-current";
 	if (page_name == "about") e_link_about.className = "title-link title-link-current";
 	else if (page_name == "journals") e_link_journals.className = "title-link title-link-current";
 	else if (page_name == "links") e_link_links.className = "title-link title-link-current";
@@ -107,7 +103,6 @@ function update_page_content(page_name)
 				if (page_name === "journals")
 				{
 					populate_collection_options();
-					populate_collection(current_collection_id);
 				}
 			}
 		);
@@ -172,110 +167,65 @@ function page_fade_start(next_page)
 
 function parse_collections(list_text)
 {
-	var list_lines = list_text.split("\n");
-
-	collections = [];
-	var current_collection = [];
-	var ii = 0;
-	var parse_step = -1;
-	while (ii < list_lines.length)
-	{
-		var this_line = list_lines[ii].trim();
-		ii += 1;
-		if (parse_step === -1)
-		{
-			if (this_line === "") continue;
-			if (this_line === "[Title]") parse_step = 0;
-		}
-		else
-		{
-			if (parse_step === 0)//title
-			{
-				if (this_line === "[Description]")
-				{
-					parse_step = 1;
-					current_collection['description'] = "";
-				}
-				else current_collection['title'] = this_line;
-			}
-			else if (parse_step === 1)//description
-			{
-				if (this_line === "[Tags]")
-				{
-					parse_step = 2;
-					current_collection['tags'] = "";
-				}
-				else
-				{
-					if (this_line.slice(0, 4) === "<div") current_collection['description'] += this_line;
-					else if (this_line.slice(0, 3) === "<li") current_collection['description'] += this_line;
-					else if (this_line.slice(0, 3) === "<ul") current_collection['description'] += this_line;
-					else current_collection['description'] += this_line + "<br>";
-				}
-			}
-			else if (parse_step === 2)//tags
-			{
-				if (this_line === "[Images]")
-				{
-					parse_step = 3;
-					current_collection['images'] = [];
-				}
-				else current_collection['tags'] += this_line + ";";
-			}
-			else if (parse_step === 3)//images
-			{
-				if (this_line === "[Title]") 
-				{
-					collections.push(current_collection);
-					current_collection = [];
-					parse_step = 0;
-				}
-				else if (this_line === "") continue;
-				else current_collection['images'].push(this_line);
-			}
-		}
-	}
-	collections.push(current_collection);
-	current_collection = [];
+	collectionsList = JSON.parse(list_text);
 	collections_loaded = true;
 }
 
-function queue_collection_load()
-{
-	if (!collections_loaded)
-		id_collections_load = setInterval(check_collections_loaded, 200);
-}
 
-function check_collections_loaded()
-{
-	if (collections_loaded === true)
-	{
-		clearInterval(id_collections_load);
-		console.log("...collections loaded");
-		populate_collection_options();
-		populate_collection(current_collection_id);
-	}
-}
+
+
+
+var collection_choice_list = null;
+var loaded_collection = null;
+var e_collection_header = null;
 
 function populate_collection_options()
 {
 	if (page_current != "journals") return;
 
-	var e_coll_choices = document.getElementById("collection-choices");
-	var e_dropdown = document.createElement("select");
-	for (ci = 0; ci < collections.length; ci++)
-	{
-		var e_dropdown_option = document.createElement("option");
-		e_dropdown_option.innerHTML = collections[ci].title;
-		e_dropdown_option.setAttribute("value", collections[ci].title);
-		e_dropdown.appendChild(e_dropdown_option);
-	}
-	//e_dropdown.selectedIndex = 
-	e_dropdown.setAttribute("onchange", "populate_collection(this.selectedIndex)");
-	e_dropdown.className = "collection-dropdown";
-	e_coll_choices.appendChild(e_dropdown);
+	var e_coll_cntnr = document.getElementById("collection-container");
 
-	e_dropdown.selectedIndex = current_collection_id;
+	if (loaded_collection != null) 
+	{
+		loaded_collection.remove();
+		loaded_collection = null;
+	}
+
+	if (e_collection_header != null)
+	{
+		e_collection_header.remove();
+		e_collection_header = null;
+	}
+
+	collection_choice_list = document.createElement("div");
+	collection_choice_list.id = "collection-choices";
+	collection_choice_list.className = "collection-choice-list";
+	e_coll_cntnr.appendChild(collection_choice_list);
+
+	for (ci = 0; ci < collectionsList.collections.length; ci++)
+	{
+		var coll = collectionsList.collections[ci];
+		var e_choice_x = document.createElement("div");
+		e_choice_x.className = "collection-choice";
+		e_choice_x.setAttribute("onclick", "populate_collection(" + ci + ")");
+
+		if (coll.showcaseImageGroupIndex > -1 && coll.showcaseImageIndex > -1)
+		{
+			var e_choice_img = document.createElement("img");
+			e_choice_img.className = "collection-choice-image";
+			var showcase_grp = coll.groups[coll.showcaseImageGroupIndex];
+			var showcase_imginfo = showcase_grp.images[coll.showcaseImageIndex];
+			e_choice_img.src = showcase_imginfo.path;
+			e_choice_x.appendChild(e_choice_img);
+		}
+
+		var e_choice_name = document.createElement("div");
+		e_choice_name.className = "collection-choice-name";
+		e_choice_name.innerHTML = coll.name;
+		e_choice_x.appendChild(e_choice_name);
+
+		collection_choice_list.appendChild(e_choice_x);
+	}
 }
 
 function populate_collection(collection_id)
@@ -283,33 +233,80 @@ function populate_collection(collection_id)
 	if (page_current != "journals") return;
 	if (!collections_loaded) return;
 
-	current_collection_id = collection_id;
-
-	var e_coll_current = document.getElementById("collection-current");
-
-	e_coll_current.innerHTML = "";
-	var coll = collections[collection_id];
-
-	var e_coll_images = document.createElement("div");
-	e_coll_images.className = "collection-image-group";
-
-	var e_coll_description = document.createElement("div");
-	e_coll_description.innerHTML = coll['description'];
-	e_coll_description.className = "collection-desc";
-
-	for (ii = 0; ii < coll['images'].length; ii += 1)
+	if (collection_choice_list != null) 
 	{
-		var image_path = coll['images'][ii];
-		var e_coll_image = document.createElement("img");
-		e_coll_image.className = "collection-image";
-		e_coll_image.src = image_path;
-		e_coll_image.title = image_path;
-		e_coll_image.setAttribute("onclick", "show_preview(this)");
-		e_coll_images.appendChild(e_coll_image);
+		collection_choice_list.remove();
+		collection_choice_list = null;
 	}
 
-	e_coll_current.appendChild(e_coll_images);
-	e_coll_current.appendChild(e_coll_description);
+	if (loaded_collection != null)
+	{
+		loaded_collection.remove();
+		loaded_collection = null;
+	}
+
+	current_collection_id = collection_id;
+	var e_coll_cntnr = document.getElementById("collection-container");
+
+	e_collection_header = document.createElement("div");
+	e_collection_header.id = "collection-header";
+	e_collection_header.className = e_collection_header.id;
+	e_coll_cntnr.appendChild(e_collection_header);
+
+	var e_coll_title_spacer = document.createElement("div");
+	e_coll_title_spacer.className = "collection-header-spacer";
+	e_collection_header.appendChild(e_coll_title_spacer);
+
+	var e_back_btn = document.createElement("img");
+	e_back_btn.className = "collection-back-button";
+	e_back_btn.setAttribute("onclick", "populate_collection_options()");
+	e_back_btn.src = "/icon-go-back.png";
+	e_collection_header.appendChild(e_back_btn);
+
+	var e_coll_title = document.createElement("div");
+	e_coll_title.className = "collection-title";
+	e_collection_header.appendChild(e_coll_title);
+
+	e_coll_title_spacer = document.createElement("div");
+	e_coll_title_spacer.className = "collection-header-spacer";
+	e_collection_header.appendChild(e_coll_title_spacer);
+
+
+	loaded_collection = document.createElement("div");
+	loaded_collection.id = "collection-current";
+	loaded_collection.className = loaded_collection.id;
+	loaded_collection.innerHTML = "";
+	e_coll_cntnr.appendChild(loaded_collection);
+
+	var coll = collectionsList.collections[collection_id];
+	if (coll != null) 
+	{
+		e_coll_title.innerText = coll.name;
+
+		var e_coll_images = document.createElement("div");
+		e_coll_images.className = "collection-image-group";
+
+		var e_coll_description = document.createElement("div");
+		e_coll_description.innerHTML = coll.desc;
+		e_coll_description.className = "collection-desc";
+
+		if (coll.groups != null)
+		{
+			for (ii = 0; ii < coll.groups.length; ii += 1)
+			{
+				var group = coll.groups[ii];
+				var image_info = group.images[0];
+				var e_coll_image = document.createElement("img");
+				e_coll_image.className = "collection-image";
+				e_coll_image.src = image_info.path;
+				e_coll_image.title = image_info.path;
+				e_coll_image.setAttribute("onclick", "show_preview(this)");
+				e_coll_images.appendChild(e_coll_image);
+			}
+		}
+	}
+	loaded_collection.appendChild(e_coll_images);
+	loaded_collection.appendChild(e_coll_description);
 }
 
 
@@ -323,9 +320,9 @@ function hide_preview()
 
 function show_preview(src)
 {
-	var coll = collections[current_collection_id];
+	var coll = collectionsList.collections[current_collection_id];
 	e_preview_container.className = "preview-container";
 	e_preview_img.src = src.src;
-	e_preview_title.innerHTML = coll.title;
+	e_preview_title.innerHTML = coll.name;
 	e_preview_subtitle.innerHTML = src.title;
 }

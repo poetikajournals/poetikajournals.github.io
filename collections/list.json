@@ -1,0 +1,247 @@
+{
+    "collections": [
+        {
+            "name": "Anaïs",
+            "etsyUrl": "",
+            "desc": "",
+            "showcaseImageGroupIndex": 1,
+            "showcaseImageIndex": 0,
+            "groups": [
+                {
+                    "name": "Taupe Rose",
+                    "images": [
+                        {
+                            "desc": "Front",
+                            "path": "/collections/anais/anais-front-tauperose.jpg"
+                        },
+                        {
+                            "desc": "Back",
+                            "path": "/collections/anais/anais-back-tauperose.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Group",
+                    "images": [
+                        {
+                            "desc": "Group",
+                            "path": "/collections/anais/anais-group.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Cocoa",
+                    "images": [
+                        {
+                            "desc": "Front",
+                            "path": "/collections/anais/anais-front-cocoa.jpg"
+                        },
+                        {
+                            "desc": "Back",
+                            "path": "/collections/anais/anais-back-cocoa.jpg"
+                        }
+                    ]
+                }
+            ],
+            "features": [
+                "Softback",
+                "Cloth",
+                "Closure",
+                "Rounded Spine"
+            ]
+        },
+        {
+            "name": "Audrey",
+            "etsyUrl": "https://www.etsy.com/listing/1561166740/",
+            "desc": "Named after the one and only Audrey Hepburn as this collection feels to me reminiscent of her elegance and simplicity in exuding an unforgettably sophisticated and charming aura.",
+            "showcaseImageGroupIndex": 0,
+            "showcaseImageIndex": 0,
+            "groups": [
+                {
+                    "name": "Black",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/audrey/audrey-black.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "White",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/audrey/audrey-white.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Red",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/audrey/audrey-red.jpg"
+                        }
+                    ]
+                }
+            ],
+            "features": [
+                "Cloth",
+                "Hardback",
+                "Closure",
+                "Bookmark",
+                "Corners"
+            ]
+        },
+        {
+            "name": "Bloom",
+            "etsyUrl": "https://www.etsy.com/listing/1572783391/",
+            "desc": "",
+            "showcaseImageGroupIndex": 2,
+            "showcaseImageIndex": 0,
+            "groups": [
+                {
+                    "name": "Lavender",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/bloom/bloom_lavender.jpg"
+                        },
+                        {
+                            "desc": "Pages",
+                            "path": "/collections/bloom/bloom-open-lavender.jpg"
+                        },
+                        {
+                            "desc": "End Paper",
+                            "path": "/collections/bloom/bloom-end-lavender.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Taupe Rose",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/bloom/bloom_taupe_rose.jpg"
+                        },
+                        {
+                            "desc": "Pages",
+                            "path": "/collections/bloom/bloom-open-tauperose.jpg"
+                        },
+                        {
+                            "desc": "End Paper",
+                            "path": "/collections/bloom/bloom-end-tauperose.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Limestone",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/bloom/bloom_limestone.jpg"
+                        },
+                        {
+                            "desc": "Pages",
+                            "path": "/collections/bloom/bloom-open-limestone.jpg"
+                        },
+                        {
+                            "desc": "End Paper",
+                            "path": "/collections/bloom/bloom-end-limestone.jpg"
+                        },
+                        {
+                            "desc": "Personlization",
+                            "path": "/collections/bloom/bloom_personalization.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Rose Pink",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/bloom/bloom_rose_pink.jpg"
+                        },
+                        {
+                            "desc": "End Paper",
+                            "path": "/collections/bloom/bloom-end-rosepink.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Sage Green",
+                    "images": [
+                        {
+                            "desc": "Cover",
+                            "path": "/collections/bloom/bloom_sage_green.jpg"
+                        },
+                        {
+                            "desc": "Pages",
+                            "path": "/collections/bloom/bloom-open-sagegreen.jpg"
+                        },
+                        {
+                            "desc": "End Paper",
+                            "path": "/collections/bloom/bloom-end-sagegreen.jpg"
+                        }
+                    ]
+                }
+            ],
+            "features": [
+                "Latch",
+                "Cloth",
+                "Hardback",
+                "Personalization",
+                "Closure",
+                "Bookmark",
+                "Corners",
+                "Window"
+            ]
+        },
+        {
+            "name": "Faie",
+            "etsyUrl": "https://www.etsy.com/listing/1573218770/",
+            "desc": "Faie, meaning \"fairy\", is the name of this journal as it exudes a magical and enchanted aura that is reminiscent of mythological fairies and their dwellings.",
+            "showcaseImageGroupIndex": 0,
+            "showcaseImageIndex": 0,
+            "groups": [
+                {
+                    "name": "Grouped",
+                    "images": [
+                        {
+                            "desc": "Stacked",
+                            "path": "/collections/faie/faie-stacked.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Green",
+                    "images": [
+                        {
+                            "desc": "Pages",
+                            "path": "/collections/faie/faie-open.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Mahogany",
+                    "images": [
+                        {
+                            "desc": "Pages",
+                            "path": "/collections/faie/faie-open-mahogany.jpg"
+                        }
+                    ]
+                }
+            ],
+            "features": [
+                "Corners",
+                "Softback",
+                "Leather",
+                "Exposed Stitching",
+                "Travel Size",
+                "Rounded Spine",
+                "Closure",
+                "Bookmark"
+            ]
+        }
+    ]
+}

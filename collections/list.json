@@ -106,9 +106,18 @@
             "name": "Bloom",
             "etsyUrl": "https://www.etsy.com/listing/1572783391/",
             "desc": "",
-            "showcaseImageGroupIndex": 2,
+            "showcaseImageGroupIndex": 0,
             "showcaseImageIndex": 0,
             "groups": [
+                {
+                    "name": "Group",
+                    "images": [
+                        {
+                            "desc": "Together",
+                            "path": "/collections/bloom/bloom_group.jpg"
+                        }
+                    ]
+                },
                 {
                     "name": "Lavender",
                     "images": [

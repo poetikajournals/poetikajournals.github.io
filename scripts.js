@@ -452,12 +452,24 @@ function drawCollectionGroups(coll, e_coll_images)
 	{
 		var group = coll.groups[ii];
 		var image_info = group.images[0];
+
+		var e_coll = document.createElement("div");
+		e_coll.className = "collection-button";
+
 		var e_coll_image = document.createElement("img");
 		e_coll_image.className = "collection-image";
 		e_coll_image.src = image_info.path;
 		e_coll_image.title = image_info.path;
 		e_coll_image.setAttribute("onclick", "SelectImageGroup(" + ii + ")");
-		e_coll_images.appendChild(e_coll_image);
+		e_coll.appendChild(e_coll_image);
+
+		var e_coll_label = document.createElement("div");
+		e_coll_label.className = "collection-label";
+		if (group.name == "Group") e_coll_label.innerText = group.images[0].desc;
+		else e_coll_label.innerText = group.name;
+		e_coll.appendChild(e_coll_label);
+
+		e_coll_images.appendChild(e_coll);
 	}
 }
 

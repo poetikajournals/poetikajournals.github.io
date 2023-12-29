@@ -511,30 +511,69 @@ body
 	justify-content: center;
 }
 
-.collection-image
+
+
+
+.collection-button
 {
+	position: relative;
+	overflow: hidden;
+	margin: 1rem;
+
 	display: inline;
 	flex-shrink: 1.0;
 	max-height: 12rem;
-	margin: 1rem;
 	aspect-ratio: 1.0;
-	object-fit: cover;
 	cursor: zoom-in;
 
+	font-size: 1.25rem;
+
 	border-radius: 0.7rem;
-	box-shadow: 0rem 0rem 0rem 0rem #0000009f;
+	transform: scale(0.95, 0.95);
+	box-shadow: 0rem 0rem 0.1rem 0.1rem #00000010;
+	transition: all 0.1s ease-in-out;
+}
+.collection-button:hover
+{
+	transform: scale(1.0, 1.0);
+	box-shadow: 0rem 0rem 0.5rem 0.25rem #00000030;
+	transition: all 0.1s ease-in-out;
+}
+.collection-button:active
+{
+	transform: scale(0.98, 0.98);
+	box-shadow: 0rem 0rem 0.1rem 0.1rem #00000040;
+	transition: all 0.1s ease-in-out;
+}
+
+.collection-label
+{
+	pointer-events: none;
+
+	position: absolute;
+	height: 1.5rem;
+	width: 100%;
+	bottom: 1rem;
+	backdrop-filter: blur(0.13rem);
+
+	background-color: #FFFFFF40;
+	color: white;
+
+	font-family: 'Abhaya Libre';
+	font-weight: bold;
+	text-shadow: #00000090 0.2rem 0.15rem 0.2rem;
+}
+
+.collection-image
+{
+	max-height: 12rem;
+	aspect-ratio: 1.0;
+	object-fit: cover;
 	transition: all 0.1s ease-in-out;
 }
 .collection-image:hover
 {
 	transform: scale(1.05, 1.05);
-	box-shadow: 0rem 0rem 1rem 0.25rem #00000040;
-	transition: all 0.1s ease-in-out;
-}
-.collection-image:active
-{
-	transform: scale(1.02, 1.02);
-	box-shadow: 0rem 0rem 0.25rem 0.1rem #00000090;
 	transition: all 0.1s ease-in-out;
 }
 

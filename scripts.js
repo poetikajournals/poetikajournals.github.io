@@ -292,11 +292,10 @@ function SelectImageGroup(id)
 {
 	var coll = collectionsList.collections[current_collection_id];
 	var grp = coll.groups[id];
-	if (id >= 0 && grp.images != null && grp.images.length < 2)
+	if (id >= 0 && grp.images != null)
 	{
 		current_group_id = id;
 		show_preview(0);
-		current_group_id = -1;
 	}
 	else
 	{
@@ -514,9 +513,9 @@ function show_preview(id)
 	preview_collection_id = current_collection_id;
 	preview_group_id = current_group_id;
 	preview_image_id = id;
-	var coll = collectionsList.collections[current_collection_id];
-	var grp = coll.groups[current_group_id];
-	var img = grp.images[id];
+	var coll = collectionsList.collections[preview_collection_id];
+	var grp = coll.groups[preview_group_id];
+	var img = grp.images[preview_image_id];
 
 	hide_preview_nav();
 
@@ -527,9 +526,9 @@ function show_preview(id)
 	}
 
 
-	e_preview_img_prev.src = grp.images[getid(id - 1, grp.images)].path;
-	e_preview_img.src = grp.images[id].path;
-	e_preview_img_next.src = grp.images[getid(id + 1, grp.images)].path;
+	e_preview_img_prev.src = grp.images[getid(preview_image_id - 1, grp.images)].path;
+	e_preview_img.src = img.path;
+	e_preview_img_next.src = grp.images[getid(preview_image_id + 1, grp.images)].path;
 
 	var titletext = coll.name;
 	if (grp.name != "Group") titletext += " / " + grp.name;
@@ -616,12 +615,12 @@ function update_preview_positions()
 
 	e_nav_preview_prev.style.position = "absolute";
 	e_nav_preview_prev.style.top = "50%";
-	e_nav_preview_prev.style.left = Math.max(nav_min_x, screen_center_x - max_w * 0.5 - 32) + "px";
+	e_nav_preview_prev.style.left = Math.max(nav_min_x, screen_center_x - max_w * 0.5 - 64) + "px";
 	e_nav_preview_prev.style.transform = "translate(-50%, -50%) scale(-1.0,1.0)";
 
 	e_nav_preview_next.style.position = "absolute";
 	e_nav_preview_next.style.top = "50%";
-	e_nav_preview_next.style.left = Math.min(nav_max_x, screen_center_x + max_w * 0.5 + 32) + "px";
+	e_nav_preview_next.style.left = Math.min(nav_max_x, screen_center_x + max_w * 0.5 + 64) + "px";
 
 	e_preview_title.style.position = "absolute";
 	e_preview_title.style.left = "0px";

@@ -607,6 +607,30 @@ function update_preview_positions()
 	get_preview_pos(phase_prev, e_preview_img_prev);
 	get_preview_pos(phase_curr, e_preview_img);
 	get_preview_pos(phase_next, e_preview_img_next);
+
+	var max_w = Math.max(e_preview_img_prev.offsetWidth, e_preview_img.offsetWidth, e_preview_img_next.offsetWidth);
+	var max_h = Math.max(e_preview_img_prev.offsetHeight, e_preview_img.offsetHeight, e_preview_img_next.offsetHeight);
+
+	var nav_min_x = e_nav_preview_next.offsetWidth;
+	var nav_max_x = screen_size_x - e_nav_preview_next.offsetWidth;
+
+	e_nav_preview_prev.style.position = "absolute";
+	e_nav_preview_prev.style.top = "50%";
+	e_nav_preview_prev.style.left = Math.max(nav_min_x, screen_center_x - max_w * 0.5 - 32) + "px";
+	e_nav_preview_prev.style.transform = "translate(-50%, -50%) scale(-1.0,1.0)";
+
+	e_nav_preview_next.style.position = "absolute";
+	e_nav_preview_next.style.top = "50%";
+	e_nav_preview_next.style.left = Math.min(nav_max_x, screen_center_x + max_w * 0.5 + 32) + "px";
+
+	e_preview_title.style.position = "absolute";
+	e_preview_title.style.left = "0px";
+	e_preview_title.style.top = (screen_center_y - max_h * 0.5 - 32) + "px";
+
+	e_preview_subtitle.style.opacity = e_preview_img.style.opacity;
+	e_preview_subtitle.style.position = "absolute";
+	e_preview_subtitle.style.left = "0px";
+	e_preview_subtitle.style.top = (screen_center_y + max_h * 0.5 + 12) + "px";
 }
 
 function get_preview_pos(phase, element)

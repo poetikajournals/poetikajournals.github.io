@@ -13,6 +13,9 @@ var e_preview_title;
 var e_preview_subtitle;
 var e_preview_img;
 
+var e_nav_preview_prev;
+var e_nav_preview_next;
+
 var collections_dir;
 var collectionsList;
 var collections_loaded = false;
@@ -36,6 +39,10 @@ function when_body_load()
 	e_preview_img = document.getElementById("preview-image");
 	e_preview_title = document.getElementById("preview-title");
 	e_preview_subtitle = document.getElementById("preview-subtitle");
+
+	e_nav_preview_prev = document.getElementById("preview-prev");
+	e_nav_preview_next = document.getElementById("preview-next");
+	hide_preview_nav();
 
 	page_fade_val = 1.0;
 	if (localStorage)
@@ -320,7 +327,8 @@ function populate_collection_view()
 	var coll = collectionsList.collections[current_collection_id];
 	if (coll != null) 
 	{
-		if (current_group_id >= 0 && current_group_id < coll.groups.length)
+		var isGroupSelected = current_group_id >= 0 && current_group_id < coll.groups.length;
+		if (isGroupSelected && coll.groups[current_group_id].name != "Group")
 			e_coll_subtitle.innerHTML = coll.groups[current_group_id].name;
 		else tryremove(e_coll_subtitle);
 
@@ -329,15 +337,37 @@ function populate_collection_view()
 		var e_coll_images = document.createElement("div");
 		e_coll_images.className = "collection-image-group";
 
+		var e_coll_desc_title = document.createElement("div");
+		e_coll_desc_title.innerText = "About";
+		e_coll_desc_title.className = "collection-section-title";
+
 		var e_coll_description = document.createElement("div");
 		e_coll_description.innerHTML = coll.desc;
 		e_coll_description.className = "collection-desc";
 
+		var e_coll_features_title = document.createElement("div");
+		e_coll_features_title.innerText = "Features";
+		e_coll_features_title.className = "collection-section-title";
+
+		var e_coll_features = document.createElement("list");
+		e_coll_features.className = "collection-feature-list";
+
+		for (var fi = 0; fi < coll.features.length; fi++)
+		{
+			var e_this_feature = document.createElement("li");
+			e_this_feature.innerHTML = coll.features[fi];
+			e_this_feature.className = "collection-feature-listitem";
+			e_coll_features.appendChild(e_this_feature);
+		}
+
 		if (current_group_id < 0) drawCollectionGroups(coll, e_coll_images);
-		else drawGroupImages(coll, e_coll_images);
+		else drawGroup(coll, e_coll_images);
 	}
 	loaded_collection.appendChild(e_coll_images);
+	loaded_collection.appendChild(e_coll_desc_title);
 	loaded_collection.appendChild(e_coll_description);
+	loaded_collection.appendChild(e_coll_features_title);
+	loaded_collection.appendChild(e_coll_features);
 }
 
 
@@ -358,7 +388,7 @@ function drawCollectionGroups(coll, e_coll_images)
 }
 
 
-function drawGroupImages(coll, e_coll_images)
+function drawGroup(coll, e_coll_images)
 {
 	if (coll.groups == null) return;
 
@@ -381,18 +411,58 @@ function drawGroupImages(coll, e_coll_images)
 
 
 
+function hide_preview_nav() { hide_preview_nav_prev(); hide_preview_nav_next(); }
+function show_preview_nav() { show_preview_nav_prev(); show_preview_nav_next(); }
+function hide_preview_nav_prev() { e_nav_preview_prev.style.display = "none"; }
+function hide_preview_nav_next() { e_nav_preview_next.style.display = "none"; }
+function show_preview_nav_prev() { e_nav_preview_prev.style.display = "block"; }
+function show_preview_nav_next() { e_nav_preview_next.style.display = "block"; }
+
+var preview_collection_id = -1;
+var preview_group_id = -1;
+var preview_image_id = -1;
+
+function previewPrev()
+{
+	show_preview(preview_image_id - 1);
+}
+
+function previewNext()
+{
+	show_preview(preview_image_id + 1);
+}
+
 function hide_preview()
 {
+	preview_collection_id = -1;
+	preview_group_id = -1;
+	preview_image_id = -1;
 	e_preview_container.className = "preview-container hidden";
 }
 
 function show_preview(id)
 {
+	preview_collection_id = current_collection_id;
+	preview_group_id = current_group_id;
+	preview_image_id = id;
 	var coll = collectionsList.collections[current_collection_id];
 	var grp = coll.groups[current_group_id];
 	var img = grp.images[id];
+
+	hide_preview_nav();
+	if (id > 0) 
+	{
+		show_preview_nav_prev();
+	}
+	if (id < (grp.images.length - 1)) 
+	{
+		show_preview_nav_next();
+	}
+
 	e_preview_container.className = "preview-container";
 	e_preview_img.src = img.path;
-	e_preview_title.innerHTML = coll.name + " / " + grp.name;
+	var titletext = coll.name;
+	if (grp.name != "Group") titletext += " / " + grp.name;
+	e_preview_title.innerHTML = titletext;
 	e_preview_subtitle.innerHTML = img.desc;
 }

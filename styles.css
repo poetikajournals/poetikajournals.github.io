@@ -208,7 +208,7 @@ body
 	flex-direction: column;
 	flex-grow: 1.0;
 	width: 100%;
-	max-width: 1000px;
+	max-width: 60rem;
 	margin-bottom: 1rem;
 	margin-top: 1rem;
 	margin-left: auto;
@@ -280,7 +280,7 @@ body
 	top: 0px;
 	width: 100%;
 	height: 100%;
-	max-width: 800px;
+	max-width: 60rem;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #FFFFFF00;
@@ -494,7 +494,7 @@ body
 	display: inline-block;
 	width: 70%;
 	font-size: 1.25rem;
-	text-align: left;
+	text-align: justify;
 }
 
 .collection-image-group
@@ -534,11 +534,35 @@ body
 
 
 
-.feature-list
+.collection-section-title
 {
-	margin: 0rem;
+	margin-top: 1.5rem;
+	margin-bottom: 0.5rem;
+	text-align: center;
+	font-size: 1.75rem;
+	font-family: 'Marck Script';
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
 }
-.feature-list::marker
+
+.collection-feature-list
+{
+	display: flex;
+	flex-direction: column;
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+}
+
+.collection-feature-listitem
+{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.collection-feature-listitem::marker
 {
 	content: "❤️ ";
 	font-size: 0.7rem;

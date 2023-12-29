@@ -24,8 +24,12 @@
                     "name": "Group",
                     "images": [
                         {
-                            "desc": "Group",
+                            "desc": "Together",
                             "path": "/collections/anais/anais-group.jpg"
+                        },
+                        {
+                            "desc": "Pages",
+                            "path": "/collections/anais/anais-pages.jpg"
                         }
                     ]
                 },
@@ -105,7 +109,7 @@
         {
             "name": "Bloom",
             "etsyUrl": "https://www.etsy.com/listing/1572783391/",
-            "desc": "",
+            "desc": "Writing journal with Personalized name and Birth month flower\r.",
             "showcaseImageGroupIndex": 0,
             "showcaseImageIndex": 0,
             "groups": [

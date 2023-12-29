@@ -42,9 +42,11 @@
 
 	<div id="preview-container" class="preview-container hidden" onclick="hide_preview()">
 		<div id="preview-body" class="preview-body">
-			<div id="preview-title" class="preview-title">Preview Title</div>
+			<div id="preview-title" class="preview-title" style="top: 2rem;">Preview Title</div>
+			<img id="preview-image-prev" class="preview-image" src="" />
 			<img id="preview-image" class="preview-image" src="" />
-			<div id="preview-subtitle" class="preview-title" style="font-size: 1.5rem;">Preview subtitle</div>
+			<img id="preview-image-next" class="preview-image" src="" />
+			<div id="preview-subtitle" class="preview-title" style="bottom: 2rem;font-size: 1.5rem;">Preview subtitle</div>
 			<div id="preview-prev" class="preview-nav-button" style="left:7%;transform:rotate(180deg);" onclick="event.stopPropagation();previewPrev()">➻</div>
 			<div id="preview-next" class="preview-nav-button" style="right:7%" onclick="event.stopPropagation();previewNext()">➻</div>
 		</div>

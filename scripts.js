@@ -9,9 +9,12 @@ var e_link_faq;
 var e_link_links;
 
 var e_preview_container;
+var e_preview_body;
 var e_preview_title;
 var e_preview_subtitle;
 var e_preview_img;
+var e_preview_img_prev;
+var e_preview_img_next;
 
 var e_nav_preview_prev;
 var e_nav_preview_next;
@@ -36,7 +39,10 @@ function when_body_load()
 	e_link_links = document.getElementById("titlelink-links");
 
 	e_preview_container = document.getElementById("preview-container");
+	e_preview_body = document.getElementById("preview-body");
+	e_preview_img_prev = document.getElementById("preview-image-prev");
 	e_preview_img = document.getElementById("preview-image");
+	e_preview_img_next = document.getElementById("preview-image-next");
 	e_preview_title = document.getElementById("preview-title");
 	e_preview_subtitle = document.getElementById("preview-subtitle");
 
@@ -65,7 +71,25 @@ function when_body_load()
 		.then(x => x.text())
 		.then(x => parse_collections(x));
 
+	addEventListener("wheel", onwheel);
 }
+
+function onwheel(wheelEvent)
+{
+	if (preview_image_id >= 0)
+	{
+		var coll = collectionsList.collections[preview_collection_id];
+		var grp = coll.groups[preview_group_id];
+		if (grp.images.length > 1)
+		{
+			if (wheelEvent.deltaY > 0) begin_preview_anim(-1);
+			else if (wheelEvent.deltaY < 0) begin_preview_anim(1);
+			else if (wheelEvent.deltaX > 0) begin_preview_anim(-1);
+			else if (wheelEvent.deltaX < 0) begin_preview_anim(1);
+		}
+	}
+}
+
 
 
 function set_page_instant(page_name)
@@ -424,20 +448,14 @@ var preview_image_id = -1;
 
 function previewPrev()
 {
-	show_preview(preview_image_id - 1);
+	begin_preview_anim(1);
+	//show_preview(preview_image_id - 1);
 }
 
 function previewNext()
 {
-	show_preview(preview_image_id + 1);
-}
-
-function hide_preview()
-{
-	preview_collection_id = -1;
-	preview_group_id = -1;
-	preview_image_id = -1;
-	e_preview_container.className = "preview-container hidden";
+	begin_preview_anim(-1);
+	//show_preview(preview_image_id + 1);
 }
 
 function show_preview(id)
@@ -450,19 +468,157 @@ function show_preview(id)
 	var img = grp.images[id];
 
 	hide_preview_nav();
-	if (id > 0) 
+
+	if (grp.images.length > 1)
 	{
 		show_preview_nav_prev();
-	}
-	if (id < (grp.images.length - 1)) 
-	{
 		show_preview_nav_next();
 	}
 
-	e_preview_container.className = "preview-container";
-	e_preview_img.src = img.path;
+
+	e_preview_img_prev.src = grp.images[getid(id - 1, grp.images)].path;
+	e_preview_img.src = grp.images[id].path;
+	e_preview_img_next.src = grp.images[getid(id + 1, grp.images)].path;
+
 	var titletext = coll.name;
 	if (grp.name != "Group") titletext += " / " + grp.name;
 	e_preview_title.innerHTML = titletext;
 	e_preview_subtitle.innerHTML = img.desc;
+
+	preview_scroll_phase = 0.0;
+	update_preview_positions();
+
+	e_preview_container.className = "preview-container";
 }
+
+function hide_preview()
+{
+	end_preview_anim();
+	e_preview_container.className = "preview-container hidden";
+	preview_collection_id = -1;
+	preview_group_id = -1;
+	preview_image_id = -1;
+}
+
+
+var interval_preview_anim = null;
+var preview_scroll_phase = 0.0;
+var preview_scroll_start = 0.0;
+var preview_scroll_end = 0.0;
+
+function begin_preview_anim(direction)
+{
+	if (Math.abs(direction) < 0.1) return;
+	if (interval_preview_anim != null) return;//clearInterval(interval_preview_anim);
+	preview_scroll_phase = 0.0;
+	preview_scroll_start = 0.0;
+	preview_scroll_end = direction;
+	interval_preview_anim = setInterval(interval_step_preview_anim, 20);
+}
+
+function end_preview_anim()
+{
+	clearInterval(interval_preview_anim);
+	interval_preview_anim = null;
+}
+
+function interval_step_preview_anim()
+{
+	const dt = 0.02;
+
+	if (preview_scroll_phase < 1.0)
+	{
+		preview_scroll_phase += dt * 3.0;
+		update_preview_positions();
+	}
+	else
+	{
+		var coll = collectionsList.collections[current_collection_id];
+		var grp = coll.groups[current_group_id];
+		if (grp != null)
+		{
+			var new_id = getid(Math.round(preview_image_id - preview_scroll_end), grp.images)
+			show_preview(new_id);
+		}
+		preview_scroll_phase = 0.0;
+		update_preview_positions();
+		end_preview_anim();
+	}
+}
+
+function update_preview_positions()
+{
+	var screen_center_y = e_preview_container.offsetHeight / 2.0;
+
+	var scrollpos = preview_scroll_start + (preview_scroll_end - preview_scroll_start) * preview_scroll_phase;
+	var phase_prev = scrollpos - 1.0;
+	var phase_curr = scrollpos;
+	var phase_next = scrollpos + 1.0;
+
+	var x_prev = get_preview_pos(phase_prev, e_preview_img_prev);
+	var x_curr = get_preview_pos(phase_curr, e_preview_img);
+	var x_next = get_preview_pos(phase_next, e_preview_img_next);
+}
+
+function get_preview_pos(phase, element)
+{
+	var screen_center_x = e_preview_container.offsetWidth / 2.0;
+	var screen_center_y = e_preview_container.offsetHeight / 2.0;
+
+	var prev_w = e_preview_img_prev.offsetWidth;
+	var curr_w = e_preview_img.offsetWidth;
+	var next_w = e_preview_img_next.offsetWidth;
+
+	var curr_x = screen_center_x;
+	var prev_x = curr_x - curr_w * 0.5 - prev_w * 0.5 - 42;
+	var next_x = curr_x + curr_w * 0.5 + next_w * 0.5 + 42;
+
+	var this_x = curr_x;
+
+	if (phase < 0.0)
+	{
+		phase = Math.abs(phase);
+		phase = saturate(phase);
+		phase = ease_in_out(phase);
+		this_x = curr_x + (prev_x - curr_x) * phase;
+	}
+	else 
+	{
+		phase = saturate(phase);
+		phase = ease_in_out(phase);
+		this_x = curr_x + (next_x - curr_x) * phase;
+	}
+
+	element.style.position = "absolute";
+	element.style.transform = "translate(-50%,-50%)";
+	element.style.opacity = Math.round((1.0 - Math.abs(phase)) * 100.0) + "%";
+	element.style.top = screen_center_y + "px";
+	element.style.left = this_x + "px";
+
+	return this_x;
+}
+
+
+
+function saturate(x)
+{
+	x = Math.max(x, 0.0);
+	x = Math.min(x, 1.0);
+	return x;
+}
+
+function ease_in_out(x)
+{
+	if (x < 0.5) return 2.0 * x * x;
+	return 1.0 - 2.0 * (x - 1.0) * (x - 1.0);
+}
+
+function getid(id, things)
+{
+	if (things == null) return -1;
+	if (things.length < 1) return -1;
+	if (things.length < 2) return 0;
+	while (id < 0) id += things.length;
+	while (id >= things.length) id -= things.length;
+	return id;
+} 

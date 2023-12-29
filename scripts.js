@@ -71,21 +71,72 @@ function when_body_load()
 		.then(x => x.text())
 		.then(x => parse_collections(x));
 
+	onwindowresize();
+
+	addEventListener("resize", onwindowresize);
 	addEventListener("wheel", onwheel);
+	addEventListener("touchstart", onTouchStart);
+	addEventListener("touchend", onTouchEnd);
+}
+
+
+var screen_size_x;
+var screen_size_y;
+var screen_center_x;
+var screen_center_y;
+
+
+function onwindowresize()
+{
+	screen_size_x = e_preview_container.offsetWidth;
+	screen_size_y = e_preview_container.offsetHeight;
+	screen_center_x = screen_size_x / 2.0;
+	screen_center_y = screen_size_y / 2.0;
+
+	if (preview_image_id >= 0) update_preview_positions();
+}
+
+
+var touch_start_pos_x;
+var touch_start_pos_y;
+var touch_end_pos_x;
+var touch_end_pos_y;
+
+function onTouchStart(e)
+{
+	touch_start_pos_x = e.changedTouches[0].pageX;
+	touch_start_pos_y = e.changedTouches[0].pageY;
+}
+
+function onTouchEnd(e)
+{
+	touch_end_pos_x = e.changedTouches[0].pageX;
+	touch_end_pos_y = e.changedTouches[0].pageY;
+	var delta_x = touch_start_pos_x - touch_end_pos_x;
+	var delta_y = touch_start_pos_y - touch_end_pos_y;
+	onAnyScroll(delta_x, delta_y);
 }
 
 function onwheel(wheelEvent)
 {
+	onAnyScroll(wheelEvent.deltaX, wheelEvent.deltaY);
+}
+
+function onAnyScroll(delta_x, delta_y)
+{
+	if (Math.abs(delta_y) > Math.abs(delta_x)) delta_x = 0.0;
+	else delta_y = 0.0;
+
 	if (preview_image_id >= 0)
 	{
 		var coll = collectionsList.collections[preview_collection_id];
 		var grp = coll.groups[preview_group_id];
 		if (grp.images.length > 1)
 		{
-			if (wheelEvent.deltaY > 0) begin_preview_anim(-1);
-			else if (wheelEvent.deltaY < 0) begin_preview_anim(1);
-			else if (wheelEvent.deltaX > 0) begin_preview_anim(-1);
-			else if (wheelEvent.deltaX < 0) begin_preview_anim(1);
+			if (delta_x > 0) begin_preview_anim(-1);
+			else if (delta_x < 0) begin_preview_anim(1);
+			else if (delta_y > 0) begin_preview_anim(-1);
+			else if (delta_y < 0) begin_preview_anim(1);
 		}
 	}
 }
@@ -548,23 +599,18 @@ function interval_step_preview_anim()
 
 function update_preview_positions()
 {
-	var screen_center_y = e_preview_container.offsetHeight / 2.0;
-
 	var scrollpos = preview_scroll_start + (preview_scroll_end - preview_scroll_start) * preview_scroll_phase;
 	var phase_prev = scrollpos - 1.0;
 	var phase_curr = scrollpos;
 	var phase_next = scrollpos + 1.0;
 
-	var x_prev = get_preview_pos(phase_prev, e_preview_img_prev);
-	var x_curr = get_preview_pos(phase_curr, e_preview_img);
-	var x_next = get_preview_pos(phase_next, e_preview_img_next);
+	get_preview_pos(phase_prev, e_preview_img_prev);
+	get_preview_pos(phase_curr, e_preview_img);
+	get_preview_pos(phase_next, e_preview_img_next);
 }
 
 function get_preview_pos(phase, element)
 {
-	var screen_center_x = e_preview_container.offsetWidth / 2.0;
-	var screen_center_y = e_preview_container.offsetHeight / 2.0;
-
 	var prev_w = e_preview_img_prev.offsetWidth;
 	var curr_w = e_preview_img.offsetWidth;
 	var next_w = e_preview_img_next.offsetWidth;

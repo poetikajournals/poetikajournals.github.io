@@ -306,7 +306,8 @@ function SelectImageGroup(id)
 
 function collections_go_back()
 {
-	if (current_group_id < 0) populate_collection_options(); else SelectImageGroup(-1);
+	SelectImageGroup(-1);
+	populate_collection_options();
 }
 
 function populate_collection_options()
@@ -317,12 +318,6 @@ function populate_collection_options()
 
 	current_group_id = -1;
 	collections_cleanup();
-
-	e_colls_title = document.createElement("div");
-	e_colls_title.className = "collection-title";
-	e_colls_title.style.margin = "0rem 0rem 1.5rem 0rem";
-	e_colls_title.innerText = "";
-	e_coll_cntnr.appendChild(e_colls_title);
 
 	collection_choice_list = document.createElement("div");
 	collection_choice_list.id = "collection-choices";
@@ -379,6 +374,7 @@ function populate_collection_view()
 	e_collection_header.appendChild(e_back_btn);
 
 	var e_coll_title = document.createElement("div");
+	e_coll_title.id = "collection-title";
 	e_coll_title.className = "collection-title";
 	e_collection_header.appendChild(e_coll_title);
 
@@ -407,6 +403,7 @@ function populate_collection_view()
 		else tryremove(e_coll_subtitle);
 
 		e_coll_title.innerText = coll.name;
+		e_coll_title.style.display = "block";
 
 		var e_coll_images = document.createElement("div");
 		e_coll_images.className = "collection-image-group";
@@ -436,6 +433,10 @@ function populate_collection_view()
 
 		if (current_group_id < 0) drawCollectionGroups(coll, e_coll_images);
 		else drawGroup(coll, e_coll_images);
+	}
+	else // coll == null
+	{
+		e_coll_title.style.display = "none";
 	}
 	loaded_collection.appendChild(e_coll_images);
 	loaded_collection.appendChild(e_coll_desc_title);

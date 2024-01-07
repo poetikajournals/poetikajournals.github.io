@@ -4,6 +4,7 @@
 	--col-background: #f1d9d9;
 	--font-size-body: 1.35rem;
 	--font-size-pagination: 1.8rem;
+	--font-size-collection-title: 2.5rem;
 }
 
 @media screen and (max-aspect-ratio: 90/100)
@@ -13,7 +14,8 @@
 		--col-highlight: rgb(199 13 13);
 		--col-background: #f1d9d9;
 		--font-size-body: 0.9rem;
-		--font-size-pagination: 1.25rem;
+		--font-size-pagination: 1.2rem;
+		--font-size-collection-title: 1.5rem;
 	}
 }
 
@@ -246,15 +248,22 @@ body
 	font-size: var(--font-size-body);
 }
 
-.content-body
+.about-body
 {
 	display: block;
 	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
 	letter-spacing: 0.05rem;
 	text-align: center;
 	font-size: var(--font-size-body);
-	margin-left: 5%;
-	margin-right: 5%;
+}
+.content-body
+{
+	display: block;
+	letter-spacing: 0.05rem;
+	text-align: center;
+	font-size: var(--font-size-body);
 }
 
 .content-link,
@@ -410,12 +419,10 @@ body
 	position: relative;
 
 	border-radius: 0.5rem;
-	font-size: 2rem;
-	padding: 0.75rem;
-	margin: 0.25rem;
-	min-width: 10rem;
-	width: 15rem;
-	height: 15rem;
+	font-size: var(--font-size-collection-title);
+	margin: 2.5%;
+	width: 45%;
+	aspect-ratio: 1.0;
 	background-color: #ffffff23;
 	cursor: pointer;
 

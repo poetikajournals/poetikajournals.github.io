@@ -2,7 +2,7 @@
 {
 	--col-highlight: rgb(199 13 13);
 	--col-background: #f1d9d9;
-	--font-size-body: 1.35rem;
+	--font-size-body: 1.25rem;
 	--font-size-pagination: 1.8rem;
 	--font-size-collection-title: 2.5rem;
 }
@@ -526,7 +526,7 @@ body
 	display: inline-block;
 	width: 70%;
 	font-size: 1.25rem;
-	text-align: justify;
+	text-align: left;
 }
 
 .collection-image-group

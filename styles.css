@@ -5,6 +5,16 @@
 	--font-size-body: 1.35rem;
 }
 
+@media screen and (max-aspect-ratio: 90/100)
+{
+	:root
+	{
+		--col-highlight: rgb(199 13 13);
+		--col-background: #f1d9d9;
+		--font-size-body: 1.2rem;
+	}
+}
+
 ::selection
 {
 	background-color: white;
@@ -153,10 +163,11 @@ body
 .linklink-group
 {
 	display: flex;
-	width: 70%;
+	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
 	flex-direction: row;
+	flex-wrap: wrap;
 	-webkit-user-select: none;
 	user-select: none;
 }
@@ -180,9 +191,9 @@ body
 {
 	display: inline-block;
 	flex-grow: 1.0;
-	margin-left: 1rem;
-	margin-right: 1rem;
-	margin-top: 1rem;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+	margin-top: 0.5rem;
 	padding: 1rem;
 	padding-bottom: 2rem;
 
@@ -479,8 +490,8 @@ body
 
 .collection-container
 {
-	padding-left: 2rem;
-	padding-right: 2rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 	margin-left: 1rem;

@@ -3,6 +3,7 @@
 	--col-highlight: rgb(199 13 13);
 	--col-background: #f1d9d9;
 	--font-size-body: 1.35rem;
+	--font-size-pagination: 1.8rem;
 }
 
 @media screen and (max-aspect-ratio: 90/100)
@@ -11,7 +12,8 @@
 	{
 		--col-highlight: rgb(199 13 13);
 		--col-background: #f1d9d9;
-		--font-size-body: 1.2rem;
+		--font-size-body: 1rem;
+		--font-size-pagination: 1.25rem;
 	}
 }
 
@@ -124,7 +126,7 @@ body
 	cursor: pointer;
 
 	text-align: center;
-	font-size: 1.8rem;
+	font-size: var(--font-size-pagination);
 	letter-spacing: 0.1rem;
 
 	margin-left: 2rem;

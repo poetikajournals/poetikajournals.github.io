@@ -1,6 +1,9 @@
 var page_current;
 
 var e_content_body;
+var e_body_background;
+var e_page_container;
+var e_lbl_debug;
 var e_intro_container;
 
 var e_link_about;
@@ -31,6 +34,12 @@ var current_group_id = -1;
 function when_body_load()
 {
 	e_content_body = document.getElementById("page-content-body");
+	e_page_container = document.getElementById("page-container");
+	e_body_background = document.getElementById("body-background");
+	e_lbl_debug = document.createElement("div");
+	e_lbl_debug.class = "debug-label";
+	document.body.appendChild(e_lbl_debug);
+
 	e_intro_container = document.getElementById("intro");
 
 	e_link_about = document.getElementById("titlelink-about");
@@ -115,6 +124,12 @@ function onTouchEnd(e)
 	var delta_x = touch_start_pos_x - touch_end_pos_x;
 	var delta_y = touch_start_pos_y - touch_end_pos_y;
 	onAnyScroll(delta_x, delta_y);
+}
+
+function onPageContainerScrolled()
+{
+	e_lbl_debug.innerText = e_page_container.scrollTop;
+	e_body_background.style.objectPosition = "0px -" + e_page_container.scrollTop * 0.1 + "px";
 }
 
 function onwheel(wheelEvent)
@@ -321,20 +336,20 @@ function populate_collection_options()
 
 	collection_choice_list = document.createElement("div");
 	collection_choice_list.id = "collection-choices";
-	collection_choice_list.className = "collection-choice-list";
+	collection_choice_list.className = "gallery-bubble-container";
 	e_coll_cntnr.appendChild(collection_choice_list);
 
 	for (ci = 0; ci < collectionsList.collections.length; ci++)
 	{
 		var coll = collectionsList.collections[ci];
 		var e_choice_x = document.createElement("div");
-		e_choice_x.className = "collection-choice";
+		e_choice_x.className = "gallery-bubble-root";
 		e_choice_x.setAttribute("onclick", "SelectCollection(" + ci + ")");
 
 		if (coll.showcaseImageGroupIndex > -1 && coll.showcaseImageIndex > -1)
 		{
 			var e_choice_img = document.createElement("img");
-			e_choice_img.className = "collection-choice-image";
+			e_choice_img.className = "gallery-bubble-image";
 			var showcase_grp = coll.groups[coll.showcaseImageGroupIndex];
 			var showcase_imginfo = showcase_grp.images[coll.showcaseImageIndex];
 			e_choice_img.src = showcase_imginfo.path;
@@ -342,9 +357,17 @@ function populate_collection_options()
 		}
 
 		var e_choice_name = document.createElement("div");
-		e_choice_name.className = "collection-choice-name";
+		e_choice_name.className = "gallery-bubble-name";
 		e_choice_name.innerHTML = coll.name;
 		e_choice_x.appendChild(e_choice_name);
+
+		if (coll.groups.length > 1)
+		{
+			var e_coll_count = document.createElement("div");
+			e_coll_count.className = "gallery-bubble-count";
+			e_coll_count.innerText = "+" + (coll.groups.length - 1);
+			e_choice_x.appendChild(e_coll_count);
+		}
 
 		collection_choice_list.appendChild(e_choice_x);
 	}
@@ -406,6 +429,7 @@ function populate_collection_view()
 		e_coll_title.style.display = "block";
 
 		var e_coll_images = document.createElement("div");
+		e_coll_images.id = "collection-image-groups";
 		e_coll_images.className = "collection-image-group";
 
 		var e_coll_desc_title = document.createElement("div");
@@ -455,20 +479,28 @@ function drawCollectionGroups(coll, e_coll_images)
 		var image_info = group.images[0];
 
 		var e_coll = document.createElement("div");
-		e_coll.className = "collection-button";
+		e_coll.className = "gallery-bubble-root";
 
 		var e_coll_image = document.createElement("img");
-		e_coll_image.className = "collection-image";
+		e_coll_image.className = "gallery-bubble-image";
 		e_coll_image.src = image_info.path;
 		e_coll_image.title = image_info.path;
 		e_coll_image.setAttribute("onclick", "SelectImageGroup(" + ii + ")");
 		e_coll.appendChild(e_coll_image);
 
 		var e_coll_label = document.createElement("div");
-		e_coll_label.className = "collection-label";
+		e_coll_label.className = "gallery-bubble-name";
 		if (group.name == "Group") e_coll_label.innerText = group.images[0].desc;
 		else e_coll_label.innerText = group.name;
 		e_coll.appendChild(e_coll_label);
+
+		if (group.images.length > 1)
+		{
+			var e_coll_count = document.createElement("div");
+			e_coll_count.className = "gallery-bubble-count";
+			e_coll_count.innerText = "+" + (group.images.length - 1);
+			e_coll.appendChild(e_coll_count);
+		}
 
 		e_coll_images.appendChild(e_coll);
 	}

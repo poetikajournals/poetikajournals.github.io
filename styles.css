@@ -1,7 +1,7 @@
 :root
 {
 	--col-highlight: rgb(199 13 13);
-	--col-background: #f1d9d9;
+	--col-background: #f3ebeb;
 	--font-size-body: 1.25rem;
 	--font-size-pagination: 1.8rem;
 	--font-size-collection-title: 2.5rem;
@@ -11,8 +11,6 @@
 {
 	:root
 	{
-		--col-highlight: rgb(199 13 13);
-		--col-background: #f1d9d9;
 		--font-size-body: 0.9rem;
 		--font-size-pagination: 1.2rem;
 		--font-size-collection-title: 1.5rem;
@@ -58,7 +56,7 @@ body
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	opacity: 10%;
+	opacity: 17%;
 }
 
 .body-footer
@@ -84,6 +82,14 @@ body
 	margin-bottom: 1.5rem;
 	max-height: 10rem;
 	object-fit: contain;
+}
+
+.debug-label
+{
+	z-index: 100;
+	position: fixed;
+	left: 1rem;
+	top: 1rem;
 }
 
 
@@ -370,7 +376,7 @@ body
 
 
 
-.collection-choice-list
+.gallery-bubble-container
 {
 	display: flex;
 	flex-direction: row;
@@ -379,42 +385,7 @@ body
 	align-items: center;
 }
 
-.collection-choice-image
-{
-	display: block;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	border-radius: 0.5rem;
-	object-fit: cover;
-
-	transition: all 0.1s ease-in-out;
-	opacity: 50%;
-}
-.collection-choice-image:hover
-{
-	transition: all 0.05s ease-in-out;
-	opacity: 100%;
-}
-
-.collection-choice-name
-{
-	pointer-events: none;
-	display: block;
-	position: absolute;
-	margin-top: 40%;
-	width: 100%;
-	z-index: 10;
-	color: white;
-	text-align: center;
-	text-shadow: #000000F0 -0.1rem 0.1rem 0.3rem;
-	font-family: 'Marck Script';
-	font-weight: normal;
-}
-
-.collection-choice
+.gallery-bubble-root
 {
 	position: relative;
 
@@ -430,11 +401,87 @@ body
 	box-shadow: 0rem 0rem 0rem 0rem #00000095;
 	transform: none;
 }
-.collection-choice:hover
+.gallery-bubble-root:hover
 {
 	transition: all 0.05s ease-in-out;
 	box-shadow: -0.25rem 0.25rem 0.5rem 0.125rem #00000020;
 	transform: translate(0.25rem, -0.25rem);
+}
+
+@media (hover: none)
+{
+	.gallery-bubble-image
+	{
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 0.5rem;
+		object-fit: cover;
+
+		transition: all 0.1s ease-in-out;
+		opacity: 80%;
+	}
+	.gallery-bubble-image:hover
+	{
+		transition: all 0.05s ease-in-out;
+		opacity: 100%;
+	}
+}
+
+@media not (hover: none)
+{
+	.gallery-bubble-image
+	{
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 0.5rem;
+		object-fit: cover;
+
+		transition: all 0.1s ease-in-out;
+		opacity: 50%;
+	}
+	.gallery-bubble-image:hover
+	{
+		transition: all 0.05s ease-in-out;
+		opacity: 100%;
+	}
+}
+
+.gallery-bubble-count
+{
+	position: absolute;
+	font-size: var(--font-size-body);
+	top: 0.5rem;
+	right: 0.5rem;
+	background-color: #ffffff70;
+	color: var(--col-highlight);
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+}
+
+.gallery-bubble-name
+{
+	pointer-events: none;
+	display: block;
+	position: absolute;
+	margin-top: 40%;
+	width: 100%;
+	z-index: 10;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	background-color: #ffffff50;
+	color: white;
+	text-align: center;
+	text-shadow: #000000F0 -0.1rem 0.1rem 0.3rem;
+	font-family: 'Marck Script';
+	font-weight: normal;
 }
 
 

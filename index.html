@@ -22,9 +22,9 @@
 </head>
 
 <body class="body-main" onload="when_body_load()">
-	<img src="/images/tissue.jpg" class="body-background"></img>
+	<img id="body-background" src="/images/tissue.jpg" class="body-background"></img>
 
-	<div class="page-container">
+	<div id="page-container" class="page-container" onscroll="onPageContainerScrolled()">
 		<div class="page-content">
 			<img src="/images/poetika_logo_dark_trimmed.png" class="logo-main" onclick="set_page('welcome')" style="cursor:pointer;">
 

@@ -36,9 +36,9 @@ function when_body_load()
 	e_content_body = document.getElementById("page-content-body");
 	e_page_container = document.getElementById("page-container");
 	e_body_background = document.getElementById("body-background");
-	e_lbl_debug = document.createElement("div");
-	e_lbl_debug.class = "debug-label";
-	document.body.appendChild(e_lbl_debug);
+	//e_lbl_debug = document.createElement("div");
+	//e_lbl_debug.class = "debug-label";
+	//document.body.appendChild(e_lbl_debug);
 
 	e_intro_container = document.getElementById("intro");
 
@@ -126,10 +126,26 @@ function onTouchEnd(e)
 	onAnyScroll(delta_x, delta_y);
 }
 
+var interval_page_scroll;
+var pageContainerScrollPos = 0;
 function onPageContainerScrolled()
 {
-	e_lbl_debug.innerText = e_page_container.scrollTop;
-	e_body_background.style.objectPosition = "0px -" + e_page_container.scrollTop * 0.1 + "px";
+	if (interval_page_scroll == null) interval_page_scroll = setInterval(frame_scroll_page, 15);
+}
+
+function frame_scroll_page()
+{
+	var delta = e_page_container.scrollTop - pageContainerScrollPos;
+	if (Math.abs(delta) > 0.05)
+	{
+		pageContainerScrollPos += delta * 0.1;
+		e_body_background.style.objectPosition = "0px -" + pageContainerScrollPos * 0.1 + "px";
+	}
+	else
+	{
+		e_body_background.style.objectPosition = "0px -" + e_page_container.scrollTop * 0.1 + "px";
+		if (interval_page_scroll != null) clearInterval(interval_page_scroll);
+	}
 }
 
 function onwheel(wheelEvent)

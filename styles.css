@@ -5,6 +5,7 @@
 	--font-size-body: 1.25rem;
 	--font-size-pagination: 1.8rem;
 	--font-size-collection-title: 2.5rem;
+	--view-ratio: 1.0;
 }
 
 @media screen and (max-aspect-ratio: 90/100)
@@ -14,6 +15,7 @@
 		--font-size-body: 0.9rem;
 		--font-size-pagination: 1.2rem;
 		--font-size-collection-title: 1.5rem;
+		--view-ratio: 1.0;
 	}
 }
 
@@ -70,6 +72,7 @@ body
 	text-align: center;
 	color: rgb(25, 25, 25);
 	letter-spacing: 0.1rem;
+	user-select: none;
 }
 
 
@@ -77,10 +80,13 @@ body
 
 .logo-main
 {
-	width: 100%;
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
 	margin-top: 0rem;
 	margin-bottom: 1.5rem;
-	max-height: 10rem;
+	max-height: 20vh;
+	max-width: 20vw;
 	object-fit: contain;
 }
 
@@ -104,8 +110,7 @@ body
 	bottom: 2rem;
 	left: 2rem;
 	right: 2rem;
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden;
 
 	border-radius: 1rem;
 	box-shadow: 0rem 0rem 1.5rem 1.5rem #00000011;
@@ -114,16 +119,24 @@ body
 
 .title-link-container
 {
-	font-family: 'Marck Script';
+	z-index: 30;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
+
+	position: absolute;
+	top: 2rem;
+	left: 2rem;
+	right: 2rem;
+	height: 2rem;
+
+	border-radius: 0.5rem;
+	font-family: 'Marck Script';
 	width: 100%;
 	margin-bottom: 1rem;
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
-	background-color: #ffffff36;
 }
 
 .title-link
@@ -172,11 +185,14 @@ body
 
 .linklink-group
 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 30vw;
+	min-width: 100px;
+	transform: translate(-50%, -50%);
 	display: flex;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	-webkit-user-select: none;
 	user-select: none;
@@ -256,10 +272,14 @@ body
 
 .about-body
 {
+	position: fixed;
 	display: block;
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	max-width: 60rem;
+	padding: 10%;
 	letter-spacing: 0.05rem;
 	text-align: center;
 	font-size: var(--font-size-body);
@@ -294,6 +314,7 @@ body
 
 .preview-container
 {
+	z-index: 250;
 	position: fixed;
 	left: 0px;
 	top: 0px;
@@ -375,6 +396,70 @@ body
 
 
 
+.infobanner
+{
+	pointer-events: none;
+	user-select: none;
+	position: fixed;
+	bottom: 10rem;
+	left: 0;
+	width: 100vw;
+	height: 6rem;
+	background-color: #ffffff30;
+	z-index: 100;
+	backdrop-filter: blur(6px);
+}
+
+.infobanner-text
+{
+	font-size: 2.5rem;
+	line-height: 2rem;
+	letter-spacing: 1rem;
+	position: relative;
+	color: white;
+	text-align: center;
+	top: 50%;
+	transform: translate(0, -50%);
+	text-shadow: #00000030 0.1rem 0.1rem 0.25rem;
+}
+
+.infobanner-subtext
+{
+	font-size: 1.25rem;
+	position: absolute;
+	color: black;
+	text-align: center;
+	left: 50%;
+	bottom: -5%;
+	transform: translate(-50%, -50%);
+	text-shadow: #00000030 0.1rem 0.1rem 0.25rem;
+}
+
+
+
+
+
+.splash-title
+{
+	pointer-events: none;
+	user-select: none;
+	z-index: -25;
+	text-align: center;
+	font-size: 24vw;
+	letter-spacing: 0.5rem;
+	position: fixed;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	color: #ffffff6f;
+	transform: translate(0%, -50%);
+	filter: blur(3px);
+
+	transition-property: opacity, filter;
+	transition-duration: 1s;
+}
+
+
 
 .gallery-bubble-container
 {
@@ -383,75 +468,219 @@ body
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 }
 
 .gallery-bubble-root
 {
-	position: relative;
+	overflow: hidden;
+	user-select: none;
+	clip-path: circle();
 
-	border-radius: 0.5rem;
+	border-radius: 50%;
 	font-size: var(--font-size-collection-title);
-	margin: 2.5%;
-	width: 45%;
 	aspect-ratio: 1.0;
 	background-color: #ffffff23;
 	cursor: pointer;
+	box-shadow: 0rem 0rem 1rem 0rem #00000025;
+	transform: translate(-50%, -50%);
 
-	transition: all 0.1s ease-in-out;
-	box-shadow: 0rem 0rem 0rem 0rem #00000095;
-	transform: none;
+	transition-property: border, box-shadow;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-out;
+
+	border: white 0px solid;
+	backdrop-filter: blur(0px);
 }
 .gallery-bubble-root:hover
 {
-	transition: all 0.05s ease-in-out;
-	box-shadow: -0.25rem 0.25rem 0.5rem 0.125rem #00000020;
-	transform: translate(0.25rem, -0.25rem);
+	border: white 5px solid;
+	box-shadow: 0rem 0rem 1rem 0rem #00000095;
 }
 
-@media (hover: none)
+.preview-bubble-root
 {
-	.gallery-bubble-image
-	{
-		display: block;
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		border-radius: 0.5rem;
-		object-fit: cover;
+	overflow: hidden;
+	user-select: none;
+	border-radius: 12rem;
+	font-size: var(--font-size-collection-title);
+	aspect-ratio: 1.0;
+	background-color: #ffffff30;
+	box-shadow: 0rem 0rem 1rem 0rem #00000095;
+	cursor: pointer;
+	transform: translate(-50%, -50%);
 
-		transition: all 0.1s ease-in-out;
-		opacity: 80%;
-	}
-	.gallery-bubble-image:hover
-	{
-		transition: all 0.05s ease-in-out;
-		opacity: 100%;
-	}
+	border: white 5px solid;
 }
 
-@media not (hover: none)
-{
-	.gallery-bubble-image
-	{
-		display: block;
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		border-radius: 0.5rem;
-		object-fit: cover;
 
-		transition: all 0.1s ease-in-out;
-		opacity: 50%;
-	}
-	.gallery-bubble-image:hover
-	{
-		transition: all 0.05s ease-in-out;
-		opacity: 100%;
-	}
+.gallery-bubble-banner
+{
+	overflow: hidden;
+	user-select: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 80%;
+	height: 20%;
+
+	border-radius: 1rem;
+	background-color: #aaaaaa50;
+	transform: translate(-50%, -50%);
+	backdrop-filter: blur(8px);
+
+	transition-property: width, height;
+	transition-duration: 0.125s;
+	transition-timing-function: ease-in-out;
+}
+
+.gallery-bubble-banner-title
+{
+	border-radius: inherit;
+	position: absolute;
+	text-align: center;
+	font-size: 2rem;
+	top: 50%;
+	left: 0%;
+	width: 100%;
+	letter-spacing: 0.2rem;
+	transform: translate(0%, -50%);
+
+	color: #ffffffff;
+
+	transition-property: top;
+	transition-duration: 0.125s;
+	transition-timing-function: ease-in-out;
+}
+
+.gallery-bubble-banner-body div
+{
+	padding: 4rem;
+}
+
+.gallery-bubble-banner-body
+{
+	border-radius: inherit;
+	position: absolute;
+	text-align: center;
+	font-size: 1.25rem;
+	line-height: 1.25rem;
+	top: 50%;
+	left: 0%;
+	width: 100%;
+	transform: translate(0%, -50%);
+
+	color: #ffffffff;
+
+	transition-property: opacity;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-in-out;
+}
+
+.gallery-bubble-banner-info
+{
+	user-select: none;
+	pointer-events: all;
+	cursor: help;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	right: 2rem;
+	filter: opacity(50%);
+	border-radius: 50%;
+	font-size: 1rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	padding: 0.5rem;
+	transform: translate(50%, -50%);
+	transition-property: filter, opacity;
+	transition-duration: 0.2s;
+}
+.gallery-bubble-banner-info:hover
+{
+	filter: opacity(100%);
+	color: #ffffffff;
+}
+
+.gallery-bubble-banner-more
+{
+	cursor: pointer;
+	pointer-events: all;
+	user-select: none;
+	position: absolute;
+	text-align: center;
+	bottom: 0%;
+	left: 50%;
+	filter: opacity(75%);
+	font-size: 1rem;
+	width: 2rem;
+	height: 2rem;
+	transform: translate(-50%, 0%);
+}
+
+.gallery-bubble-banner-corner
+{
+	user-select: none;
+	transform-origin: center;
+	transform: translate(40%, -50%) rotate(30deg);
+	position: relative;
+	font-size: 1rem;
+	top: 15%;
+	right: 22%;
+	width: 100%;
+	height: 3vh;
+	line-height: 3.5vh;
+	text-align: center;
+	overflow: visible;
+	background-color: rgb(23, 18, 7);
+	color: #ffffffc0;
+
+	transition-property: color, background-color, opacity;
+	transition-duration: 0.125s;
+	transition-timing-function: ease-in-out;
+}
+.gallery-bubble-banner-corner:hover
+{
+	background-color: white;
+	color: black;
+	cursor: help;
+}
+
+.bubbles-back
+{
+	user-select: none;
+	z-index: 15;
+	cursor: pointer;
+	display: block;
+	position: fixed;
+	border-radius: 0.5rem;
+	left: 50%;
+	bottom: 2.5rem;
+	transform: translate(-50%, 0);
+	padding: 1rem;
+	background-color: #ffffff60;
+	color: #aaaaaaa0;
+
+	transition-property: color, background-color, opacity;
+	transition-duration: 0.2s;
+}
+.bubbles-back:hover
+{
+	background-color: #ffffffa0;
+	color: var(--col-highlight);
+}
+
+.gallery-bubble-image
+{
+	user-select: none;
+	pointer-events: none;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .gallery-bubble-count
@@ -459,11 +688,16 @@ body
 	position: absolute;
 	font-size: var(--font-size-body);
 	top: 0.5rem;
-	right: 0.5rem;
-	background-color: #ffffff70;
-	color: var(--col-highlight);
-	border-radius: 0.5rem;
-	padding: 0.5rem;
+	right: 0;
+	background-color: #ffffff50;
+	color: white;
+	border-radius: 0.5rem 0rem 0rem 0.5rem;
+	padding-left: 0.5rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-right: 0.5rem;
+	opacity: 70%;
+	text-shadow: #000000ee 0.05rem 0.1rem 0.2rem;
 }
 
 .gallery-bubble-name
@@ -715,17 +949,23 @@ body
 }
 
 
-
+.faq-container
+{
+	position: fixed;
+	top: 16rem;
+	left: 50%;
+	transform: translate(-50%, 0);
+	width: min(600px, 80%);
+	bottom: 4rem;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 2rem;
+}
 
 .faq-group
 {
-	width: 90%;
-	overflow: hidden;
+	width: 100%;
 	border-radius: 0.5rem;
-	margin-top: 1.5rem;
-	margin-bottom: 1.5rem;
-	margin-left: auto;
-	margin-right: auto;
 	backdrop-filter: blur(0.25rem);
 
 	transition: all 0.25s ease-in-out;
@@ -832,10 +1072,15 @@ body
 
 .welcome-text
 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	font-family: "Petit Formal Script";
 	color: black;
 	display: block;
 	text-align: center;
+	width: 80vw;
 	max-width: 50rem;
 	margin-left: auto;
 	margin-right: auto;

@@ -18,13 +18,15 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="theme-color" content="#ffffff">
 
+	<script src="/classes.js" defer></script>
 	<script src="/scripts.js" defer></script>
 </head>
 
 <body class="body-main" onload="when_body_load()">
 	<img id="body-background" src="/images/tissue.jpg" class="body-background"></img>
+	<div id="background-grad" class="background-grad"></div>
 
-	<div id="page-container" class="page-container" onscroll="onPageContainerScrolled()">
+	<div id="page-container" class="page-container">
 		<div class="page-content">
 			<img src="/images/poetika_logo_dark_trimmed.png" class="logo-main" onclick="set_page('welcome')" style="cursor:pointer;">
 
@@ -42,19 +44,7 @@
 
 	</div>
 
-	<div id="preview-container" class="preview-container hidden" onclick="hide_preview()">
-		<div id="preview-body" class="preview-body">
-			<div id="preview-title" class="preview-title">Preview Title</div>
-			<img id="preview-image-prev" class="preview-image" src="" />
-			<img id="preview-image" class="preview-image" src="" />
-			<img id="preview-image-next" class="preview-image" src="" />
-			<div id="preview-subtitle" class="preview-title" style="font-size: 1.5rem;">Preview subtitle</div>
-			<div id="preview-prev" class="preview-nav-button" onclick="event.stopPropagation();previewPrev()">➻</div>
-			<div id="preview-next" class="preview-nav-button" onclick="event.stopPropagation();previewNext()">➻</div>
-		</div>
-	</div>
-
-	<div class="body-footer">Poetika Journals © 2024</div>
+	<div class="body-footer" title="Created with Love by Thomas Rasor">Poetika Journals © 2024</div>
 </body>
 
 </html>

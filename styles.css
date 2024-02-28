@@ -5,9 +5,10 @@
 	--font-size-body: 1.25rem;
 	--font-size-pagination: 1.8rem;
 	--font-size-collection-title: 2.5rem;
-	--view-ratio: 1.0;
+	--skinny-aspect: 1.0;
 	--page-border-width: 1rem;
 	--footer-font-size: 1rem;
+	--screen-size-mult: 1.0;
 
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
@@ -149,7 +150,7 @@ body
 	flex-wrap: wrap;
 
 	position: absolute;
-	top: 2rem;
+	top: calc(2rem - (var(--skinny-aspect) * 2rem));
 	left: 2rem;
 	right: 2rem;
 	height: 2rem;
@@ -327,7 +328,8 @@ body
 	padding: 10%;
 	letter-spacing: 0.05rem;
 	text-align: center;
-	font-size: var(--font-size-body);
+	font-size: calc(var(--font-size-body) * (1.0 - 0.5 * var(--skinny-aspect)) * var(--screen-size-mult));
+	line-height: calc(var(--font-size-body) * (1.0 - 0.5 * var(--skinny-aspect)));
 }
 .content-body
 {
@@ -343,6 +345,7 @@ body
 	display: span;
 	text-decoration: none;
 	color: var(--col-highlight);
+	word-wrap: break-word;
 }
 
 .content-link:hover,
@@ -1024,16 +1027,12 @@ body
 .faq-container
 {
 	position: absolute;
-	top: 50%;
+	top: calc(50vh + 10vh * var(--skinny-aspect));
 	left: 50%;
-	width: 50vw;
-	height: 60vh;
+	width: calc(50vw + 35vw * var(--skinny-aspect));
+	height: calc(60vh + 15vh * var(--skinny-aspect));
 	min-width: 100px;
 	transform: translate(-50%, -50%);
-
-	display: flex;
-	flex-direction: column;
-	align-content: space-between;
 
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -1043,8 +1042,8 @@ body
 .faq-group
 {
 	display: block;
+	overflow: hidden;
 	position: relative;
-	min-height: 6rem;
 	width: 100%;
 
 	margin-top: 0.5rem;
@@ -1054,6 +1053,7 @@ body
 	transition-property: transform, box-shadow;
 	transition-duration: 0.25s;
 	transition-timing-function: ease-in-out;
+
 
 	transform: translate(0rem, 0rem);
 	box-shadow: -0.125rem 0.125rem 0.125rem 0rem #00000015;
@@ -1069,9 +1069,8 @@ body
 .faq-question
 {
 	display: block;
-	width: 100%;
-	background-color: #ffffff20;
-	font-size: 1.2rem;
+	background-color: #ffffff80;
+	font-size: calc(1.2rem - 0.3rem * var(--skinny-aspect));
 	font-weight: bold;
 	text-align: left;
 	padding: 0.75rem;
@@ -1081,10 +1080,10 @@ body
 {
 	display: block;
 	background-color: #ffffff05;
-	font-size: 1rem;
+	font-size: calc(1rem - 0.3rem * var(--skinny-aspect));
 	font-weight: normal;
 	text-align: right;
-	padding: 0.5rem;
+	padding: 0.75rem;
 }
 
 

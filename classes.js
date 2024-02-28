@@ -97,6 +97,9 @@ class JournalCollectionServer
 
 class ViewData
 {
+	screen_size_base;
+	screen_size_mult;
+
 	screen_size_x;
 	screen_size_y;
 	screen_center_x;
@@ -106,14 +109,13 @@ class ViewData
 	screen_aspect_square;
 	screen_aspect_vertical;
 	screen_aspect_horizontal;
+	screen_aspect_skinny;
 
 	bubble_pos_0;
 	bubble_pos_1;
 	bubble_pos_2;
 
-	static saturate(x) { return Math.min(Math.max(x, 0.0), 1.0); }
-	static lerp(x, y, t) { return x + (y - x) * t; }
-	static lerpclamped(x, y, t) { return x + (y - x) * this.saturate(t); }
+	static invlerp(a, b, x) { return (x - a) / (b - a); }
 
 	onwindowresize()
 	{
@@ -126,6 +128,16 @@ class ViewData
 		this.screen_aspect_vertical = saturate((1.0 - this.screen_aspect) * 10.0);
 		this.screen_aspect_horizontal = saturate(Math.max(0.0, this.screen_aspect - 1.0) * 10.0);
 		this.screen_aspect_square = 1.0 - saturate(Math.abs(this.screen_aspect - 1.0) * 4.0);
+
+		this.screen_size_base = lerp(this.screen_size_x, this.screen_size_y, this.screen_aspect_vertical);
+		this.screen_size_mult = 0.5 + 0.5 * saturate(ViewData.invlerp(400, 1000, this.screen_size_base));
+
+		if (this.screen_aspect > 1.0) this.screen_aspect_skinny = Math.max(0.0, 1.0 - 1.8 / this.screen_aspect);
+		else this.screen_aspect_skinny = Math.max(0.0, 1.0 - this.screen_aspect);
+
+		//rounding to nearest 10th for better chance matching an actual font size
+		this.screen_aspect_skinny = Math.round(this.screen_aspect_skinny * 10.0) * 0.1;
+
 		var spacing_aspect = lerp(this.screen_aspect, 1.0 - this.screen_aspect, this.screen_aspect_vertical);
 		var bubble_spacing = 0.7 + 0.05 * Math.min(Math.max(spacing_aspect, -1.0, 1.0));
 		/*
@@ -137,13 +149,15 @@ class ViewData
 		e_lbl_debug.innerHTML += `<br>spc:${bubble_spacing}`;
 		*/
 
+
 		vertical_layout = this.screen_aspect < 1.0;
-		document.documentElement.style.setProperty('--view-ratio', this.screen_aspect);
-		document.documentElement.style.setProperty('--page-border-width', vertical_layout ? "1rem" : "2rem");
-		document.documentElement.style.setProperty('--footer-font-size', vertical_layout ? "0.7rem" : "0.9rem");
-		document.documentElement.style.setProperty('--font-size-body', vertical_layout ? "0.9rem" : "1.25rem");
-		document.documentElement.style.setProperty('--font-size-pagination', vertical_layout ? "1.2rem" : "1.8rem");
-		document.documentElement.style.setProperty('--font-size-collection-title', vertical_layout ? "1.5rem" : "2.5rem");
+		document.documentElement.style.setProperty('--page-border-width', lerp(2, 0.5, this.screen_aspect_skinny) + "rem");
+		document.documentElement.style.setProperty('--footer-font-size', lerp(0.9, 0.5, this.screen_aspect_skinny) + "rem");
+		document.documentElement.style.setProperty('--font-size-body', lerp(1.25, 0.9, this.screen_aspect_skinny) + "rem");
+		document.documentElement.style.setProperty('--font-size-pagination', lerp(1.8, 1.2, this.screen_aspect_skinny) + "rem");
+		document.documentElement.style.setProperty('--font-size-collection-title', lerp(2.5, 1.5, this.screen_aspect_skinny) + "rem");
+		document.documentElement.style.setProperty('--skinny-aspect', this.screen_aspect_skinny);
+		document.documentElement.style.setProperty('--screen-size-mult', this.screen_size_mult);
 
 		bubble_width_base = lerp(60, 60, this.screen_aspect_square);
 		if (bubble_spare && bubble_spare.e_root) bubble_spare.set_width(bubble_width_base);

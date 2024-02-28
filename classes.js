@@ -54,9 +54,10 @@ class JournalCollectionServer
 
 	deselect_one_level()
 	{
-		if (this.try_deselect(2)) return;
-		if (this.try_deselect(1)) return;
-		this.try_deselect(0);
+		if (this.try_deselect(2)) return true;
+		if (this.try_deselect(1)) return true;
+		if (this.try_deselect(0)) return true;
+		return false;
 	}
 
 	try_deselect(level)
@@ -70,12 +71,14 @@ class JournalCollectionServer
 	wrap_selection(level)
 	{
 		if (this.selection[level] < 0) return;
+		var psel = this.selection;
 		switch (level)
 		{
 			case 0: this.selection[0] = wrap_id(this.selection[0], this.get_level_data(0).length); break;
 			case 1: this.selection[1] = wrap_id(this.selection[1], this.get_level_data(1).length); break;
 			case 2: this.selection[2] = wrap_id(this.selection[2], this.get_level_data(2).length); break;
 		}
+		if (psel != this.selection) save_gallery_selection();
 	}
 
 	finish_loading(x)
@@ -98,7 +101,19 @@ class ViewData
 	screen_size_y;
 	screen_center_x;
 	screen_center_y;
+
 	screen_aspect;
+	screen_aspect_square;
+	screen_aspect_vertical;
+	screen_aspect_horizontal;
+
+	bubble_pos_0;
+	bubble_pos_1;
+	bubble_pos_2;
+
+	static saturate(x) { return Math.min(Math.max(x, 0.0), 1.0); }
+	static lerp(x, y, t) { return x + (y - x) * t; }
+	static lerpclamped(x, y, t) { return x + (y - x) * this.saturate(t); }
 
 	onwindowresize()
 	{
@@ -106,7 +121,21 @@ class ViewData
 		this.screen_size_y = window.innerHeight;
 		this.screen_center_x = this.screen_size_x / 2.0;
 		this.screen_center_y = this.screen_size_y / 2.0;
+
 		this.screen_aspect = this.screen_size_x / this.screen_size_y;
+		this.screen_aspect_vertical = saturate((1.0 - this.screen_aspect) * 10.0);
+		this.screen_aspect_horizontal = saturate(Math.max(0.0, this.screen_aspect - 1.0) * 10.0);
+		this.screen_aspect_square = 1.0 - saturate(Math.abs(this.screen_aspect - 1.0) * 4.0);
+		var spacing_aspect = lerp(this.screen_aspect, 1.0 - this.screen_aspect, this.screen_aspect_vertical);
+		var bubble_spacing = 0.7 + 0.05 * Math.min(Math.max(spacing_aspect, -1.0, 1.0));
+		/*
+		e_lbl_debug.innerHTML = `<br>asp:${this.screen_aspect}`;
+		e_lbl_debug.innerHTML += `<br>inv:${(1.0 / this.screen_aspect)}`;
+		e_lbl_debug.innerHTML += `<br>ver:${this.screen_aspect_vertical}`;
+		e_lbl_debug.innerHTML += `<br>hor:${this.screen_aspect_horizontal}`;
+		e_lbl_debug.innerHTML += `<br>sqr:${this.screen_aspect_square}`;
+		e_lbl_debug.innerHTML += `<br>spc:${bubble_spacing}`;
+		*/
 
 		vertical_layout = this.screen_aspect < 1.0;
 		document.documentElement.style.setProperty('--view-ratio', this.screen_aspect);
@@ -115,6 +144,35 @@ class ViewData
 		document.documentElement.style.setProperty('--font-size-body', vertical_layout ? "0.9rem" : "1.25rem");
 		document.documentElement.style.setProperty('--font-size-pagination', vertical_layout ? "1.2rem" : "1.8rem");
 		document.documentElement.style.setProperty('--font-size-collection-title', vertical_layout ? "1.5rem" : "2.5rem");
+
+		bubble_width_base = lerp(60, 60, this.screen_aspect_square);
+		if (bubble_spare && bubble_spare.e_root) bubble_spare.set_width(bubble_width_base);
+		if (bubble_curr && bubble_curr.e_root) bubble_curr.set_width(bubble_width_base);
+		if (bubble_prev && bubble_prev.e_root) bubble_prev.set_width(bubble_width_base);
+		if (bubble_next && bubble_next.e_root) bubble_next.set_width(bubble_width_base);
+
+		var bubble_axis_size = vertical_layout ? this.screen_size_y * 0.6 : this.screen_size_x;
+		var bubble_axis_size_inv = vertical_layout ? this.screen_size_x : this.screen_size_y * 0.6;
+		const default_pos_0 = 25.0;
+		const default_pos_1 = 50.0;
+		const default_pos_2 = 75.0;
+
+		this.bubble_pos_1 = default_pos_1;//50%, middle of screen, 'this.screen_center_[axis]'
+
+		var bubble_pos_1_px = this.bubble_pos_1 * bubble_axis_size * 0.01;
+		var default_pos_0_px = default_pos_0 * bubble_axis_size * 0.01;
+		var default_pos_2_px = default_pos_2 * bubble_axis_size * 0.01;
+
+		var bubble_width_actual = bubble_width_base * 0.01;
+		var bubble_offset_0_px = Math.abs(default_pos_0_px - bubble_pos_1_px) * bubble_spacing;
+		var bubble_offset_2_px = Math.abs(default_pos_2_px - bubble_pos_1_px) * bubble_spacing;
+		var ideal_pos_0_px = bubble_pos_1_px - Math.max(bubble_width_actual, bubble_offset_0_px);
+		var ideal_pos_2_px = bubble_pos_1_px + Math.max(bubble_width_actual, bubble_offset_2_px);
+
+		this.bubble_pos_0 = (ideal_pos_0_px / bubble_axis_size) * 100.0;
+		this.bubble_pos_2 = (ideal_pos_2_px / bubble_axis_size) * 100.0;
+		bx_0 = this.bubble_pos_0;
+		bx_2 = this.bubble_pos_2;
 	}
 }
 
@@ -152,7 +210,7 @@ class GalleryBubble
 		this.e_root.className = "gallery-bubble-root";
 		this.e_root.title = this.title;
 		this.e_root.style.position = "absolute";
-		this.e_root.style.width = "min(" + bubble_width_base + "vw," + bubble_width_base + "vh)";
+		this.set_width(bubble_width_base);
 		this.set_position("50%");
 
 		this.e_img = null;
@@ -193,7 +251,7 @@ class GalleryBubble
 
 		this.e_banner_corner = document.createElement("div");
 		this.e_banner_corner.className = "gallery-bubble-banner-corner";
-		this.e_banner_corner.innerText = "! OUT OF STOCK !";
+		this.e_banner_corner.innerText = "UNAVAILABLE";
 		this.e_banner_corner.style.display = "none";
 		this.e_banner_corner.title = "What does this mean?";
 		this.e_root.appendChild(this.e_banner_corner);
@@ -230,9 +288,14 @@ class GalleryBubble
 		this.e_more_icon.style.opacity = is_bubble_container(this.id) ? "100%" : "0%";
 	}
 
-	set_transform(scale)
+	set_transform(scale, tilt = 0.0)
 	{
-		this.e_root.style.transform = "translate(-50%,-50%) scale(" + scale + "%)";
+		this.e_root.style.transform = "translate(-50%,-50%) scale(" + scale + "%) rotate3d(0,1,0," + tilt + "deg)";
+	}
+
+	set_width(w)
+	{
+		this.e_root.style.width = "min(" + w + "vw," + w + "vh)";
 	}
 
 	set_position(x, y = "50%")
@@ -319,8 +382,8 @@ class GalleryBubble
 		}
 
 		t = ease_in_out(t);
-		var w = lerp(80, 100, t);
-		var h = lerp(20, 100, t);
+		var w = lerp(60, 100, t);
+		var h = lerp(15, 100, t);
 
 		this.e_img.style.filter = "blur(" + lerp(0, 0.125, t) + "em)";
 
@@ -346,10 +409,13 @@ class GalleryBubble
 
 class AnimJob
 {
+	static global_speed = 1;
+
 	t = 0.0;
 	speed = 1.0;
 	interruptible = false;
 	easing = true;
+	deltaTimeLast = 0.01;
 	updateFx = (x) => { };
 	afterFx = () => { };
 
@@ -372,7 +438,6 @@ class AnimJob
 		{
 			if (!this.interruptible) return;
 			this.finish();
-			this.animationRequestId = -1;
 		}
 		this.t = 0.0;
 		this.init_properties();
@@ -396,9 +461,10 @@ class AnimJob
 		}
 
 		var dt = (ts - this.prev_ts) * 0.001;
+		this.deltaTimeLast = dt;
 		this.prev_ts = ts;
 
-		this.t += dt * this.speed;
+		this.t += dt * this.speed * AnimJob.global_speed;
 		if (this.t >= 1.0)
 		{
 			this.t = 1.0;
@@ -445,6 +511,7 @@ class InputManager
 	is_gamepad_connected = false;
 
 	is_input_enabled = false;
+	static is_input_paused = false;
 	enable_input_check = always_true;
 
 	constructor()
@@ -470,6 +537,18 @@ class InputManager
 		window.addEventListener("gamepaddisconnected", this.on_gamepad_removed.bind(this));
 
 		setInterval(this.step_check_gamepad_input.bind(this), 100);
+	}
+
+	Pause()
+	{
+		InputManager.is_input_paused = true;
+		this.is_input_enabled = false;
+	}
+
+	Resume()
+	{
+		InputManager.is_input_paused = false;
+		this.is_input_enabled = this.enable_input_check();
 	}
 
 	on_gamepad_added(e)
@@ -513,8 +592,9 @@ class InputManager
 	*/
 	step_check_gamepad_input()
 	{
-		this.is_input_enabled = this.enable_input_check();
+		if (InputManager.is_input_paused) return;
 
+		this.is_input_enabled = this.enable_input_check();
 		if (!this.is_input_enabled) return;
 
 		var all_gamepads = navigator.getGamepads();
@@ -554,8 +634,8 @@ class InputManager
 	{
 		this.touch_end_pos_x = e.changedTouches[0].pageX;
 		this.touch_end_pos_y = e.changedTouches[0].pageY;
-		var delta_x = touch_start_pos_x - touch_end_pos_x;
-		var delta_y = touch_start_pos_y - touch_end_pos_y;
+		var delta_x = this.touch_start_pos_x - this.touch_end_pos_x;
+		var delta_y = this.touch_start_pos_y - this.touch_end_pos_y;
 		this.onAnyScroll(delta_x, delta_y);
 	}
 
@@ -599,9 +679,9 @@ class InputManager
 			return;
 		}
 
-		if (delta_x > this.scroll_deadzone) NextBubble();
-		else if (delta_x < -this.scroll_deadzone) PrevBubble();
-		else if (delta_y > this.scroll_deadzone) NextBubble();
-		else if (delta_y < -this.scroll_deadzone) PrevBubble();
+		if (delta_x > this.scroll_deadzone) OnBubblesNext();
+		else if (delta_x < -this.scroll_deadzone) OnBubblesPrev();
+		else if (delta_y > this.scroll_deadzone) OnBubblesNext();
+		else if (delta_y < -this.scroll_deadzone) OnBubblesPrev();
 	}
 }

@@ -29,20 +29,20 @@
 	<div id="page-container" class="page-container">
 		<div class="page-content">
 			<div class="title-link-container">
-				<div id="titlelink-about" class="title-link" onclick="set_page('about')">About</div>
-				<div id="titlelink-journals" class="title-link" onclick="set_page('journals')">Journals</div>
-				<div id="titlelink-links" class="title-link" onclick="set_page('links')">Links</div>
-				<div id="titlelink-faq" class="title-link" onclick="set_page('faq')">FAQ</div>
+				<div id="titlelink-highlighter" class="title-link-highlight backdrop-obscure"></div>
+				<div id="titlelink-about" class="title-link" onclick="set_page('about')" onmouseenter="HoverTitleLink(this)" onmouseleave="LeaveTitleLink(this)">About</div>
+				<div id="titlelink-journals" class="title-link" onclick="set_page('journals')" onmouseenter="HoverTitleLink(this)" onmouseleave="LeaveTitleLink(this)">Journals</div>
+				<div id="titlelink-links" class="title-link" onclick="set_page('links')" onmouseenter="HoverTitleLink(this)" onmouseleave="LeaveTitleLink(this)">Links</div>
+				<div id="titlelink-faq" class="title-link" onclick="set_page('faq')" onmouseenter="HoverTitleLink(this)" onmouseleave="LeaveTitleLink(this)">FAQ</div>
 			</div>
 
 			<div id="content-container" class="page-content-container">
 				<div id="page-content-body" class="content-body"></div>
 			</div>
 
-			<img src="/images/poetika_logo_dark_trimmed.png" class="logo-main" onclick="set_page('welcome')" style="cursor:pointer;">
 		</div>
-
 	</div>
+	<img src="/images/poetika_logo_dark_trimmed.png" class="logo-main" onclick="set_page('welcome')" style="cursor:pointer;">
 
 	<div class="body-footer" title="Created with Love by Thomas Rasor">Poetika Journals © 2024</div>
 </body>

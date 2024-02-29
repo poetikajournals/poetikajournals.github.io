@@ -125,15 +125,16 @@ class ViewData
 		this.screen_center_y = this.screen_size_y / 2.0;
 
 		this.screen_aspect = this.screen_size_x / this.screen_size_y;
-		this.screen_aspect_vertical = saturate((1.0 - this.screen_aspect) * 10.0);
-		this.screen_aspect_horizontal = saturate(Math.max(0.0, this.screen_aspect - 1.0) * 10.0);
+		this.screen_aspect_vertical = saturate((1.0 - this.screen_aspect) * 50.0);
+		this.screen_aspect_horizontal = saturate(Math.max(0.0, this.screen_aspect - 1.0) * 50.0);
 		this.screen_aspect_square = 1.0 - saturate(Math.abs(this.screen_aspect - 1.0) * 4.0);
 
 		this.screen_size_base = lerp(this.screen_size_x, this.screen_size_y, this.screen_aspect_vertical);
 		this.screen_size_mult = 0.5 + 0.5 * saturate(ViewData.invlerp(400, 1000, this.screen_size_base));
 
 		if (this.screen_aspect > 1.0) this.screen_aspect_skinny = Math.max(0.0, 1.0 - 1.8 / this.screen_aspect);
-		else this.screen_aspect_skinny = Math.max(0.0, 1.0 - this.screen_aspect);
+		else this.screen_aspect_skinny = Math.max(0.0, 1.0 - this.screen_aspect * 0.5);
+		this.screen_aspect_skinny = this.screen_aspect_skinny * this.screen_aspect_skinny;
 
 		//rounding to nearest 10th for better chance matching an actual font size
 		this.screen_aspect_skinny = Math.round(this.screen_aspect_skinny * 10.0) * 0.1;
@@ -154,9 +155,11 @@ class ViewData
 		document.documentElement.style.setProperty('--page-border-width', lerp(2, 0.5, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--footer-font-size', lerp(0.9, 0.5, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--font-size-body', lerp(1.25, 0.9, this.screen_aspect_skinny) + "rem");
-		document.documentElement.style.setProperty('--font-size-pagination', lerp(1.8, 1.2, this.screen_aspect_skinny) + "rem");
+		document.documentElement.style.setProperty('--font-size-pagination', lerp(1.8, 0.5, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--font-size-collection-title', lerp(2.5, 1.5, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--skinny-aspect', this.screen_aspect_skinny);
+		document.documentElement.style.setProperty('--vertical-aspect', this.screen_aspect_vertical);
+		document.documentElement.style.setProperty('--horizontal-aspect', this.screen_aspect_horizontal);
 		document.documentElement.style.setProperty('--screen-size-mult', this.screen_size_mult);
 
 		bubble_width_base = lerp(60, 60, this.screen_aspect_square);
@@ -187,6 +190,9 @@ class ViewData
 		this.bubble_pos_2 = (ideal_pos_2_px / bubble_axis_size) * 100.0;
 		bx_0 = this.bubble_pos_0;
 		bx_2 = this.bubble_pos_2;
+
+		// update the position of the link highlighter
+		if (e_link_active) move_title_link_highlight(e_link_active);
 	}
 }
 
@@ -255,7 +261,7 @@ class GalleryBubble
 		this.e_info_icon.className = "gallery-bubble-banner-info";
 		this.e_info_icon.src = "/images/icon-info.png";
 		this.e_info_icon.title = "More Info ( I )";
-		this.e_banner.appendChild(this.e_info_icon);
+		this.e_root.appendChild(this.e_info_icon);
 
 		this.e_more_icon = document.createElement("img");
 		this.e_more_icon.className = "gallery-bubble-banner-more";

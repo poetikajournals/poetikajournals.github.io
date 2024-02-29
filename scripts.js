@@ -13,6 +13,7 @@ var e_content_body;
 var e_intro_container;
 
 var page_current;
+var e_link_active;
 var e_link_about;
 var e_link_journals;
 var e_link_faq;
@@ -113,10 +114,20 @@ function collect_element_references()
 	e_page_container = document.getElementById("page-container");
 	e_body_background = document.getElementById("body-background");
 	e_intro_container = document.getElementById("intro");
+
+	e_link_highlight = document.getElementById("titlelink-highlighter");
 	e_link_about = document.getElementById("titlelink-about");
 	e_link_journals = document.getElementById("titlelink-journals");
 	e_link_faq = document.getElementById("titlelink-faq");
 	e_link_links = document.getElementById("titlelink-links");
+}
+
+function move_title_link_highlight(e)
+{
+	//e_link_highlight.style.top = e.offsetTop + "px";
+	e_link_highlight.style.left = e.offsetLeft + "px";
+	e_link_highlight.style.width = e.offsetWidth + "px";
+	//e_link_highlight.style.height = e.offsetHeight + "px";
 }
 
 function can_receive_input()
@@ -157,6 +168,17 @@ function set_page(page_name, force)
 	if (localStorage) localStorage.setItem("page", page_name);
 }
 
+function HoverTitleLink(e)
+{
+	move_title_link_highlight(e);
+	e_link_highlight.style.boxShadow = "inset 0 0 10vw 2.5vw #ffffffc0";
+}
+function LeaveTitleLink(e)
+{
+	move_title_link_highlight(e_link_active);
+	e_link_highlight.style.boxShadow = "none";
+}
+
 function reset_page_title_links()
 {
 	e_link_about.className = "title-link";
@@ -168,10 +190,17 @@ function reset_page_title_links()
 function update_page_title_link(page_name)
 {
 	reset_page_title_links();
-	if (page_name == "about") e_link_about.className = "title-link title-link-current";
-	else if (page_name == "journals") e_link_journals.className = "title-link title-link-current";
-	else if (page_name == "links") e_link_links.className = "title-link title-link-current";
-	else if (page_name == "faq") e_link_faq.className = "title-link title-link-current";
+
+	switch (page_name)
+	{
+		case "about": e_link_active = e_link_about; break;
+		case "journals": e_link_active = e_link_journals; break;
+		case "links": e_link_active = e_link_links; break;
+		case "faq": e_link_active = e_link_faq; break;
+	}
+
+	e_link_active.className = "title-link title-link-current";
+	move_title_link_highlight(e_link_active);
 }
 
 async function update_page_content(page_name)

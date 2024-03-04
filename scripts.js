@@ -124,6 +124,8 @@ function collect_element_references()
 
 function move_title_link_highlight(e)
 {
+	if (!e) return;
+	if (!e_link_highlight) return;
 	//e_link_highlight.style.top = e.offsetTop + "px";
 	e_link_highlight.style.left = e.offsetLeft + "px";
 	e_link_highlight.style.width = e.offsetWidth + "px";
@@ -199,8 +201,11 @@ function update_page_title_link(page_name)
 		case "faq": e_link_active = e_link_faq; break;
 	}
 
-	e_link_active.className = "title-link title-link-current";
-	move_title_link_highlight(e_link_active);
+	if (e_link_active)
+	{
+		e_link_active.className = "title-link title-link-current";
+		move_title_link_highlight(e_link_active);
+	}
 }
 
 async function update_page_content(page_name)

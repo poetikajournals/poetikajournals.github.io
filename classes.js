@@ -154,7 +154,7 @@ class ViewData
 		vertical_layout = this.screen_aspect < 1.0;
 		document.documentElement.style.setProperty('--page-border-width', lerp(2, 0.5, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--footer-font-size', lerp(0.9, 0.5, this.screen_aspect_skinny) + "rem");
-		document.documentElement.style.setProperty('--font-size-body', lerp(1.25, 0.9, this.screen_aspect_skinny) + "rem");
+		document.documentElement.style.setProperty('--font-size-body', lerp(1.25, 0.6, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--font-size-pagination', lerp(1.8, 0.5, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--font-size-collection-title', lerp(2.5, 1.5, this.screen_aspect_skinny) + "rem");
 		document.documentElement.style.setProperty('--skinny-aspect', this.screen_aspect_skinny);
@@ -210,6 +210,7 @@ class GalleryBubble
 	e_banner;
 	e_banner_corner;
 	e_more_icon;
+	e_view_icon;
 	e_info_icon;
 
 	info_desc = null;
@@ -265,9 +266,16 @@ class GalleryBubble
 
 		this.e_more_icon = document.createElement("img");
 		this.e_more_icon.className = "gallery-bubble-banner-more";
-		this.e_more_icon.src = "/images/icon-more.png";
+		this.e_more_icon.src = "/images/icon-more-in-circle.png";
 		this.e_more_icon.title = "See More ( Space )";
-		this.e_banner.appendChild(this.e_more_icon);
+		this.e_root.appendChild(this.e_more_icon);
+
+		this.e_view_icon = document.createElement("img");
+		this.e_view_icon.className = "gallery-bubble-banner-more";
+		this.e_view_icon.src = "/images/icon-zoom.png";
+		this.e_view_icon.title = "View Image";
+		this.e_view_icon.style.opacity = "0%";
+		this.e_root.appendChild(this.e_view_icon);
 
 		this.e_banner_corner = document.createElement("div");
 		this.e_banner_corner.className = "gallery-bubble-banner-corner";
@@ -290,6 +298,7 @@ class GalleryBubble
 			this.e_banner_corner.style.pointerEvents = "none";
 			this.e_more_icon.style.pointerEvents = "none";
 			this.e_info_icon.style.pointerEvents = "none";
+			this.e_view_icon.style.pointerEvents = "none";
 		}
 	}
 
@@ -305,7 +314,11 @@ class GalleryBubble
 		refresh_bubble_corner_banner(this, new_id);
 
 		this.e_info_icon.style.display = this.is_own_desc ? "block" : "none";
-		this.e_more_icon.style.opacity = is_bubble_container(this.id) ? "100%" : "0%";
+		var bubble_is_container = is_bubble_container(this.id);
+		this.e_more_icon.style.opacity = bubble_is_container ? "100%" : "0%";
+		this.e_more_icon.style.pointerEvents = bubble_is_container ? "all" : "none";
+		this.e_view_icon.style.opacity = bubble_is_container ? "0%" : "100%";
+		this.e_view_icon.style.pointerEvents = bubble_is_container ? "none" : "all";
 	}
 
 	set_transform(scale, tilt = 0.0)
@@ -390,12 +403,14 @@ class GalleryBubble
 	{
 		if (t > 0.5)
 		{
+			this.e_view_icon.style.display = "none";
 			this.e_more_icon.style.display = "none";
 			this.e_info_icon.style.display = "none";
 			this.update_moreinfo_data();
 		}
 		else
 		{
+			this.e_view_icon.style.display = "block";
 			this.e_more_icon.style.display = "block";
 			this.e_info_icon.style.display = "block";
 			this.e_banner_title.innerText = get_bubble_label(this.id);

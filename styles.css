@@ -14,6 +14,8 @@
 
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
+
+	text-rendering: optimizeLegibility;
 }
 
 ::selection
@@ -55,9 +57,15 @@
 
 
 
+html
+{
+	overscroll-behavior: none;
+}
+
 body
 {
 
+	overscroll-behavior: none;
 	font-family: 'Abhaya Libre';
 	line-height: var(--font-size-body);
 	color: black;
@@ -156,13 +164,10 @@ body
 	top: calc(1rem - (var(--skinny-aspect) * 1rem) + var(--vertical-aspect) * 6rem);
 	left: calc(1rem - (var(--skinny-aspect) * 1rem));
 	right: calc(1rem - (var(--skinny-aspect) * 1rem));
-	height: 2rem;
+	height: calc(2 * var(--font-size-pagination));
 
 	border-radius: 0.5rem;
 	font-family: 'Marck Script';
-	margin-bottom: 1rem;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
 
 	background-color: #ffffff50;
 }
@@ -194,11 +199,11 @@ body
 	font-size: var(--font-size-pagination);
 	letter-spacing: 0.1rem;
 
+	transform: translate(0%, 40%);
+
 	min-width: 3rem;
 	padding-left: calc(2rem * (1.0 - var(--skinny-aspect)));
 	padding-right: calc(2rem * (1.0 - var(--skinny-aspect)));
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
 
 	color: #000000aa;
 
@@ -475,7 +480,7 @@ body
 .infobanner-text
 {
 	font-size: calc(2.0 * var(--font-size-body));
-	line-height: 2rem;
+	line-height: calc(2.0 * var(--font-size-body));
 	letter-spacing: 0.5rem;
 	position: relative;
 	color: white;
@@ -507,8 +512,8 @@ body
 	transform: translate(-50%, 0%);
 	left: 50%;
 	bottom: 0.5rem;
-	padding-left: var(--font-size-body);
-	padding-right: var(--font-size-body);
+	padding-left: calc(var(--font-size-body) * var(--screen-size-mult));
+	padding-right: calc(var(--font-size-body) * var(--screen-size-mult));
 	padding-top: 0.125rem;
 	padding-bottom: 0.125rem;
 
@@ -607,6 +612,7 @@ body
 	width: 60%;
 	height: 15%;
 
+	border: #ffffff2a solid 3px;
 	border-radius: 1rem;
 	background-color: #aaaaaa50;
 	transform: translate(-50%, -50%);
@@ -639,7 +645,7 @@ body
 
 .gallery-bubble-banner-body div
 {
-	padding: min(8vw, 8vh);
+	padding: min(3vw, 3vh);
 }
 
 .gallery-bubble-banner-body
@@ -668,8 +674,8 @@ body
 	pointer-events: all;
 	position: absolute;
 	cursor: help;
-	top: 25%;
-	left: 50%;
+	top: 70%;
+	left: 25%;
 	width: calc(1rem * (2 - 1 * var(--skinny-aspect)));
 	height: calc(1rem * (2 - 1 * var(--skinny-aspect)));
 	padding: 0.5rem;
@@ -677,7 +683,7 @@ body
 	text-align: center;
 	border-radius: 50%;
 
-	filter: drop-shadow(-1px 1px 1px #00000088);
+	filter: drop-shadow(-1px 1px 1px #00000088) opacity(33%);
 	transform: translate(-50%, -50%);
 	transition-property: transform, filter, opacity;
 	transition-duration: 0.1s;
@@ -685,23 +691,35 @@ body
 .gallery-bubble-banner-info:hover
 {
 	transform: translate(-47%, -53%);
-	filter: drop-shadow(-2px 2px 2px #000000c8);
+	filter: drop-shadow(-2px 2px 0.5px #00000058) opacity(100%);
 	color: #ffffffff;
 }
 
 .gallery-bubble-banner-more
 {
-	cursor: pointer;
-	pointer-events: all;
 	user-select: none;
+	pointer-events: all;
 	position: absolute;
+	cursor: help;
+	top: 70%;
+	left: 75%;
+	width: calc(1rem * (2 - 1 * var(--skinny-aspect)));
+	height: calc(1rem * (2 - 1 * var(--skinny-aspect)));
+	padding: 0.5rem;
+
 	text-align: center;
-	bottom: 0%;
-	left: 50%;
-	width: calc(var(--font-size-body) * 1.5);
-	height: calc(var(--font-size-body) * 1.5);
-	transform: translate(-50%, 0%);
-	filter: drop-shadow(-1px 1px 2px #000000c8);
+	border-radius: 50%;
+
+	filter: drop-shadow(-1px 1px 1px #00000088) opacity(33%);
+	transform: translate(-50%, -50%);
+	transition-property: transform, filter, opacity;
+	transition-duration: 0.1s;
+}
+.gallery-bubble-banner-more:hover
+{
+	transform: translate(-47%, -53%);
+	filter: drop-shadow(-2px 2px 0.5px #00000058) opacity(100%);
+	color: #ffffffff;
 }
 
 .gallery-bubble-banner-corner
@@ -772,7 +790,7 @@ body
 	left: 50%;
 	bottom: 2.5rem;
 	transform: translate(-50%, 0);
-	padding: 1rem;
+	padding: calc(1rem * var(--screen-size-mult));
 	background-color: #ffffff60;
 	color: #b58b8ba0;
 
